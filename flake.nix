@@ -11,16 +11,26 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
     let 
-      nixosSystem = import ./lib/nixosConfig.nix;
       version = "24.05";
+      system = "x86_64-linux";
+      lib = nixpkgs.lib;
+      pkgs = import nixpkgs {
+        inherit system;
+      };
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      nixosSystem = import ./lib/nixosConfig.nix;
     in
     {
       nixosConfigurations = {
         nix-laptop = nixosSystem "nix-laptop" {
-          inherit inputs nixpkgs home-manager version;
-          system = "x86_64-linux";
+          inherit lib pkgs pkgs-unstable home-manager;
+          inherit inputs version;
+          # nixpkgs.config.allowUnfree = lib.mkForce true;
           # adtionalModules = [ nixos-hardware.nixosModules.microsoft-surface-pro-3 ];
         };
       };

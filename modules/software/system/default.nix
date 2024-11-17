@@ -2,6 +2,7 @@ _:
 
 {
   imports = [
+    ./development.nix
     ./fonts.nix
     ./hyprland.nix
     ./notifications.nix

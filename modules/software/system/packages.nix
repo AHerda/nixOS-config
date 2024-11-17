@@ -17,13 +17,6 @@
     pkgs-unstable.alacritty
     kitty
 
-    # developmet
-    cmake
-    gcc
-    gnumake
-    python3
-    rustup
-
     # shell
     bash
     nushell

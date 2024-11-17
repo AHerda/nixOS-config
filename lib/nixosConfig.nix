@@ -1,4 +1,4 @@
-name: { nixpkgs, home-manager, inputs, system, version,
+name: { lib, pkgs, pkgs-unstable, home-manager, inputs, version,
   adtionalModules ? [],
 }:
 
@@ -10,15 +10,13 @@ let
     fullName = data.fullName;
     userEmail = data.userEmail;
   };
-  pkgs-unstable = import inputs.nixpkgs-unstable {
-    inherit system;
-  };
-in 
-  nixpkgs.lib.nixosSystem {
-    inherit system;
+in
+  lib.nixosSystem {
+    inherit pkgs;
 
     specialArgs = {
-      inherit inputs version pkgs-unstable;
+      inherit pkgs-unstable;
+      inherit inputs version;
       inherit hostname user;
       helper = import ./helper.nix;
     };
@@ -35,7 +33,8 @@ in
           useUserPackages = true;
 
           extraSpecialArgs = {
-            inherit pkgs-unstable version;
+            inherit pkgs-unstable;
+            inherit version;
             inherit hostname user;
           };
         };
