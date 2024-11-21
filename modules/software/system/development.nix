@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     # languages / compilers
     cmake
+    eww
     gcc
     gnumake
     julia

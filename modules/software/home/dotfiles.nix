@@ -9,7 +9,7 @@ in
 {
   # xdg.configFile.".config".source = toPath ".dotfiles/.config";
   home.file = {
-    ".zshrc".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.zshrc";
+    # ".zshrc".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.zshrc";
     # ".config".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config";
     ".config/alacritty".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/alacritty";
     ".config/eww".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/eww";
