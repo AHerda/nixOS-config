@@ -27,7 +27,10 @@
       cat="bat";
       v="nvim";
       ".."="z ..";
-      update="sudo nixos-rebuild switch --flake ~/nixos";
+      ssh="kitten ssh";
+      update="path=\"$(pwd)\";cd ~/nixos; sudo nix flake update;cd $path";
+      rebuild="sudo nixos-rebuild switch --flake ~/nixos";
+      rebuild-test="sudo nixos-rebuild test --flake ~/nixos";
     };
     initExtra = ''
       # export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh

@@ -13,6 +13,7 @@
 
     # uni apps
     # pkgs-unstable.mathematica
+    subversion
 
     # other development sofware
     (gnuradio.override {

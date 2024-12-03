@@ -2,11 +2,12 @@
 
 {
   imports = [
+    # ./nvim.nix
     ./dotfiles.nix
     ./git.nix
-    # ./nvim.nix
-    ./zsh.nix
     ./packages.nix
+    ./tmux.nix
+    ./zsh.nix
   ];
 
   home = {
