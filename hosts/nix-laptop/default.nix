@@ -11,6 +11,7 @@
       bluetooth.enable = true;
       brightness.enable = true;
       touchscreen.enable = true;
+      usb.enable = true;
     };
   };
 }

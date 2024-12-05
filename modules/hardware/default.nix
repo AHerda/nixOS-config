@@ -6,5 +6,6 @@
     ./bluetooth.nix
     ./brightness.nix
     ./touchscreen.nix
+    ./usb.nix
   ];
 }
