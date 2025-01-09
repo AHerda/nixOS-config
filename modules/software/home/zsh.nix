@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ pkgs, pkgs-unstable, user, ... }:
 
 {
   programs.zsh = {
@@ -42,7 +42,7 @@
   };
 
   home.packages = with pkgs; [
-    oh-my-posh
+    pkgs-unstable.oh-my-posh
     # oh-my-zsh
     zsh-autosuggestions
     zsh-syntax-highlighting

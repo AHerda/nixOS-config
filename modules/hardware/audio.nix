@@ -14,5 +14,7 @@ in
       pkgs.libinput
     ];
     hardware.pulseaudio.enable = true;
+    services.pipewire.audio.enable = false;
+    services.pipewire.enable = false;
   };
 }

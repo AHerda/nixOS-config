@@ -12,6 +12,7 @@
     rofi
     wofi
     libsForQt5.dolphin
+    feh
 
     # terminal
     pkgs-unstable.alacritty
