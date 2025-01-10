@@ -11,7 +11,7 @@
     };
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager }@inputs:
     let 
       version = "24.05";
       system = "x86_64-linux";

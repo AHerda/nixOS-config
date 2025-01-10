@@ -1,26 +1,42 @@
-{ pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 
+let
+  cfg = config.modules.software.guiApps;
+in
 {
-  programs = {
-    firefox.enable = true;
-    yazi.enable = true;
-    zsh.enable = true;
+  options.modules.software.guiApps = {
+    enable = lib.mkEnableOption "guiApps";
   };
 
-  environment.systemPackages = with pkgs; [
-    # Desktop
-    rofi
-    wofi
-    libsForQt5.dolphin
-    feh
+  config = lib.mkMerge [
+    (lib.mkIf cfg.enable {
+      programs = {
+        firefox.enable = true;
+      };
 
-    # terminal
-    pkgs-unstable.alacritty
-    kitty
+      environment.systemPackages = with pkgs; [
+        # Desktop
+        rofi
+        wofi
+        libsForQt5.dolphin
+        feh
 
-    # shell
-    bash
-    nushell
-    # zsh
+        # terminal
+        pkgs-unstable.alacritty
+        kitty
+        pkgs-unstable.ghostty
+      ];
+    })
+    ({
+      programs = {
+        yazi.enable = true;
+        zsh.enable = true;
+      };
+
+      environment.systemPackages = with pkgs; [
+        bash
+        nushell
+      ];
+    })
   ];
 }

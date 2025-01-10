@@ -2,7 +2,6 @@
 
 {
   imports = [
-    # ./nvim.nix
     ./dotfiles.nix
     ./git.nix
     ./packages.nix

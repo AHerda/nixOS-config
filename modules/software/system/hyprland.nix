@@ -1,16 +1,25 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+let
+  cfg = config.modules.software.hypr;
+in
 {
-  # configure hyprland
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
+  options.modules.software.hypr = {
+    enable = lib.mkEnableOption "hypr";
   };
 
-  environment.systemPackages = with pkgs; [
-    hyprlock
-    hypridle
-    hyprpaper
-    waybar
-  ];
+  config = lib.mkIf cfg.enable {
+    # configure hyprland
+    programs.hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+
+    environment.systemPackages = with pkgs; [
+      hyprlock
+      hypridle
+      hyprpaper
+      waybar
+    ];
+  };
 }

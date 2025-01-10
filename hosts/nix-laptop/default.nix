@@ -13,5 +13,13 @@
       touchscreen.enable = true;
       usb.enable = true;
     };
+
+    software = {
+      guiApps.enable = true;
+      hypr.enable = true;
+      notifications.enable = true;
+      sddm.enable = true;
+      # tmux.enable = true;
+    };
   };
 }
