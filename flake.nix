@@ -32,8 +32,11 @@
         nix-laptop = nixosSystem "nix-laptop" {
           inherit lib pkgs pkgs-unstable home-manager;
           inherit inputs version;
-          # nixpkgs.config.allowUnfree = lib.mkForce true;
           # adtionalModules = [ nixos-hardware.nixosModules.microsoft-surface-pro-3 ];
+        };
+        normalIso = nixosSystem "normalIso" {
+          inherit lib pkgs pkgs-unstable home-manager;
+          inherit inputs version;
         };
       };
     };
