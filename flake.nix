@@ -16,14 +16,16 @@
       version = "24.05";
       system = "x86_64-linux";
       lib = nixpkgs.lib;
+      nixosSystem = import ./lib/nixosConfig.nix;
+      unfree = import ./lib/unfree.nix {};
       pkgs = import nixpkgs {
         inherit system;
       };
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
-        config.allowUnfree = true;
+        config.allowUnfreePredicate = pkg:
+          builtins.elem (lib.getName pkg) unfree;
       };
-      nixosSystem = import ./lib/nixosConfig.nix;
     in
     {
       nixosConfigurations = {

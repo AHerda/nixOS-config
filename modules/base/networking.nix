@@ -9,7 +9,7 @@
   networking.networkmanager.enable = true;
   networking.firewall = {
     enable = lib.mkDefault true;
-    # allowedTCPPorts = [];
-    # allowedUDPPorts = [];
+    allowedTCPPorts = [ 8080 57621 ];
+    allowedUDPPorts = [ 5353 ];
   };
 }

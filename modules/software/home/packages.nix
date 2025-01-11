@@ -19,5 +19,6 @@
 
     # Applications
     telegram-desktop
+    pkgs-unstable.spotify
   ];
 }

@@ -12,6 +12,7 @@
     rustup
 
     # uni apps
+    # pkgs-unstable.wolfram-engine
     # pkgs-unstable.mathematica
     subversion
 
