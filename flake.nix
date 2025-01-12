@@ -26,18 +26,16 @@
         config.allowUnfreePredicate = pkg:
           builtins.elem (lib.getName pkg) unfree;
       };
+      inheritImportant = {
+          inherit lib pkgs pkgs-unstable home-manager;
+          inherit inputs version;
+      };
     in
     {
       nixosConfigurations = {
-        nix-laptop = nixosSystem "nix-laptop" {
-          inherit lib pkgs pkgs-unstable home-manager;
-          inherit inputs version;
-          # adtionalModules = [ nixos-hardware.nixosModules.microsoft-surface-pro-3 ];
-        };
-        normalIso = nixosSystem "normalIso" {
-          inherit lib pkgs pkgs-unstable home-manager;
-          inherit inputs version;
-        };
+        nix-laptop = nixosSystem "nix-laptop" inheritImportant;
+        normalIso = nixosSystem "normalIso" inheritImportant;
+        serverIso = nixosSystem "serverIso" inheritImportant;
       };
     };
 }
