@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, user, ... }:
 
 {
   imports = [
@@ -8,6 +8,7 @@
   config.modules = {
     base = {
       networkmanager.enable = true;
+      users.${user.userName}.enable = true;
     };
 
     hardware = {
@@ -23,7 +24,6 @@
       hypr.enable = true;
       notifications.enable = true;
       sddm.enable = true;
-      # tmux.enable = true;
     };
   };
 }

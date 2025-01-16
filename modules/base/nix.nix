@@ -1,9 +1,10 @@
-{ lib, user, ... }:
+{ config, lib, user, ... }:
 
 {
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ user.userName ];
+    trusted-users = []
+      ++ lib.optionals (config.modules.base.users.${user.userName}.enable) [ user.userName ];
   };
 
   nix.gc = {

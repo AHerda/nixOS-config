@@ -1,4 +1,4 @@
-name: { lib, pkgs, pkgs-unstable, home-manager, inputs, version,
+name: { lib, pkgs, pkgs-unstable, inputs, version,
   adtionalModules ? [],
 }:
 
@@ -12,32 +12,16 @@ let
   };
 in
   lib.nixosSystem {
-    inherit pkgs;
+    inherit pkgs lib;
 
     specialArgs = {
       inherit pkgs-unstable;
       inherit inputs version;
       inherit hostname user;
-      helper = import ./helper.nix;
     };
 
     modules = [
       ../hosts/${name}
       ../modules
-      home-manager.nixosModules.home-manager
-      {
-        home-manager = {
-          users.${data.userName} = import ../modules/software/home/home.nix;
-
-          useGlobalPkgs = true;
-          useUserPackages = true;
-
-          extraSpecialArgs = {
-            inherit pkgs-unstable;
-            inherit version;
-            inherit hostname user;
-          };
-        };
-      }
     ] ++ adtionalModules;
   }

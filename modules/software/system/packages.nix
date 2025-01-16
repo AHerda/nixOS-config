@@ -16,7 +16,8 @@ in
 
       environment.systemPackages = with pkgs; [
         # Desktop
-        rofi
+        # rofi
+        rofi-wayland
         wofi
         libsForQt5.dolphin
         feh
