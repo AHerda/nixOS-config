@@ -11,7 +11,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
     let 
       version = "24.05";
       system = "x86_64-linux";
@@ -27,7 +27,7 @@
           builtins.elem (lib.getName pkg) unfree;
       };
       inheritImportant = {
-          inherit lib pkgs pkgs-unstable home-manager;
+          inherit lib pkgs pkgs-unstable;
           inherit inputs version;
       };
     in

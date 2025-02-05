@@ -8,6 +8,10 @@
   config.nixpkgs.hostPlatform = system;
 
   config.modules = {
+    base = {
+        networkmanager.enable = true;
+    };
+
     hardware = {
       audio.enable = true;
       bluetooth.enable = true;

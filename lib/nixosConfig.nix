@@ -24,4 +24,5 @@ in
       ../hosts/${name}
       ../modules
     ] ++ adtionalModules;
+        #++ [ inputs.nixos-hardware.nixosModules.microsoft-surface-pro-3 ];
   }

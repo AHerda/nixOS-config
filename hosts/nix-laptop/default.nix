@@ -7,6 +7,7 @@
 
   config.modules = {
     base = {
+      bootLoader.enable = true;
       networkmanager.enable = true;
       users.${user.userName}.enable = true;
     };

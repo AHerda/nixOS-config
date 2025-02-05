@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     # cli
     bat
+    cava
     eza
     fzf
     neofetch
@@ -16,6 +17,7 @@
     # user programs
     pkgs-unstable.neovim
     lazygit
+    pkgs-unstable.ollama
 
     # Applications
     telegram-desktop

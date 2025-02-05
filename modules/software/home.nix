@@ -1,4 +1,4 @@
-{ inputs, config, pkgs-unstable, hostname, user, version }:
+{ inputs, config, lib, pkgs-unstable, hostname, user, version, ... }:
 
 let
   usersCfg = config.modules.base.users;
@@ -11,7 +11,7 @@ in
 
   home-manager = {
     users = lib.mkMerge [
-      (getUserFile ${user.userName})
+      (getUserFile user.userName)
     ];
 
     useGlobalPkgs = true;

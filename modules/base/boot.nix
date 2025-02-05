@@ -1,8 +1,17 @@
-{ config, ... }:
+{ config, lib, ... }:
 
+let
+  cfg = config.modules.base.bootLoader;
+in
 {
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  options.modules.base.bootLoader = {
+    enable = lib.mkEnableOption "bootLoader";
+  };
+
+  config = lib.mkIf cfg.enable {
+    boot.loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
 }
