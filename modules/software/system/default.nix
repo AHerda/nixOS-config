@@ -8,5 +8,7 @@ _:
     ./notifications.nix
     ./packages.nix
     ./sddm.nix
+    ./virtualisation.nix
+    ./work-packages.nix
   ];
 }

@@ -25,6 +25,8 @@
       hypr.enable = true;
       notifications.enable = true;
       sddm.enable = true;
+      virtualisation.enable = true;
+      virtualisation.program = "both";
     };
   };
 }

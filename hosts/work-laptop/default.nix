@@ -1,0 +1,41 @@
+{ config, user, ... }:
+
+{
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
+  config.modules = {
+    base = {
+      bootLoader.enable = true;
+      networkmanager.enable = true;
+      users.${user.userName}.enable = true;
+      proxy = {
+        enable = false;
+        url = "http://10.158.100.2:8080";
+        noProxyUrls = "127.0.0.0/8, localhost, .nokia.net, .nsn-net.net, .nsn-rdnet.net, .ext.net.nokia.com, .int.net.nokia.com, .inside.nsn.com, .inside.nokiasiemensnetworks.com, .emea.nsn-net.net, .nesc.nokia.net, 192.168.49.2";
+        # ToDo: check .nsn-rdnet.net
+      };
+    };
+
+    hardware = {
+      audio.enable = true;
+      bluetooth.enable = true;
+      brightness.enable = true;
+      touchscreen.enable = false;
+      usb.enable = true;
+    };
+
+    software = {
+      guiApps.enable = true;
+      hypr.enable = true;
+      notifications.enable = true;
+      sddm.enable = false;
+      workPackages.enable = true;
+      virtualisation = {
+        enable = true;
+        program = "both";
+      };
+    };
+  };
+}

@@ -1,5 +1,5 @@
 name: { lib, pkgs, pkgs-unstable, inputs, version,
-  adtionalModules ? [],
+  additionalModules ? [],
 }:
 
 let
@@ -23,6 +23,5 @@ in
     modules = [
       ../hosts/${name}
       ../modules
-    ] ++ adtionalModules;
-        #++ [ inputs.nixos-hardware.nixosModules.microsoft-surface-pro-3 ];
+    ] ++ additionalModules;
   }

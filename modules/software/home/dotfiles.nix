@@ -16,5 +16,7 @@ in
     ".config/rofi".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/rofi";
     ".config/oh-my-posh".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/oh-my-posh";
     ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/waybar";
+
+    "wallpapers".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/wallpapers";
   };
 }

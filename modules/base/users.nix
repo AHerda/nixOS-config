@@ -20,11 +20,12 @@ in
         description = user.fullName;
         extraGroups = [
           "audio"
+          "docker"
           "media"
           "networkmanager"
           "surface-control"
-          "wheel"
           "video"
+          "wheel"
         ];
         shell = pkgs.zsh;
       };
