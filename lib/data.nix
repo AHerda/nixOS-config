@@ -3,7 +3,7 @@ _:
 let
   userName = "adrian";
   fullName = "Adrian Herda";
-  userEmail = "adrianherda@gmail.com";
+  userEmail = "adrian.herda@nokia.com";
 in
   {
     inherit userName fullName userEmail;

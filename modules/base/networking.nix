@@ -16,7 +16,8 @@ in {
         allowedTCPPorts = [ 22 80 ];
         allowedUDPPorts = [ ];
       };
-    }
+      networking.nameservers = [ "1.1.1.1" "9.9.9.9" ];
+    })
     (lib.mkIf cfg.enable {
       networking.networkmanager = {
         enable = true;

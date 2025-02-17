@@ -40,6 +40,8 @@
     initContent = ''
       # export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
       eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/my-theme.toml)"
+
+      source ~/.config/zsh/functions
     '';
   }; # programs.zsh
 
