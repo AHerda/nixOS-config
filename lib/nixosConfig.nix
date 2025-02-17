@@ -1,4 +1,4 @@
-name: { lib, pkgs, pkgs-unstable, inputs, version,
+name: { lib, pkgs, pkgs-unstable, inputs,
   additionalModules ? [],
 }:
 
@@ -15,8 +15,7 @@ in
     inherit pkgs lib;
 
     specialArgs = {
-      inherit pkgs-unstable;
-      inherit inputs version;
+      inherit inputs pkgs-unstable;
       inherit hostname user;
     };
 

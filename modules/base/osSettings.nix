@@ -1,10 +1,20 @@
-{ version, ... }:
+{ config, lib, ... }:
 
+let
+  cfg = config.modules.base.version;
+in
 {
-  system.stateVersion = version;
+  options.modules.base.version = lib.mkOption {
+    type = lib.types.strMatching "[0-9]{2}\.[0-9]{2}";
+    description = "System state version";
+  };
 
-  environment.variables = {
-    EDITOR = "vim";
-    NIXOS_OZONE_WL=1;
+  config = {
+    system.stateVersion = cfg;
+
+    environment.variables = {
+        EDITOR = "vim";
+        NIXOS_OZONE_WL=1;
+    };
   };
 }

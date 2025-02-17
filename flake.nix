@@ -14,7 +14,6 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
     let
-      version = "24.11";
       system = "x86_64-linux";
       lib = nixpkgs.lib;
       nixosSystem = import ./lib/nixosConfig.nix;
@@ -28,18 +27,17 @@
           builtins.elem (lib.getName pkg) unfree;
       };
       inheritImportant = {additionalModules ? []}: {
-        inherit lib pkgs pkgs-unstable;
-        inherit inputs version;
+        inherit inputs lib pkgs pkgs-unstable;
         inherit additionalModules;
       };
     in
     {
       nixosConfigurations = {
-        nix-laptop = nixosSystem "nix-laptop" inheritImportant;
+        nix-laptop = nixosSystem "nix-laptop" (inheritImportant {});
         work-laptop = nixosSystem "work-laptop" (inheritImportant
           { additionalModules = [ inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14 ]; });
-        normalIso = nixosSystem "normalIso" inheritImportant;
-        serverIso = nixosSystem "serverIso" inheritImportant;
+        normalIso = nixosSystem "normalIso" (inheritImportant {});
+        serverIso = nixosSystem "serverIso" (inheritImportant {});
       };
     };
 }

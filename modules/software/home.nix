@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs-unstable, hostname, user, version, ... }:
+{ inputs, config, lib, pkgs-unstable, hostname, user, ... }:
 
 let
   usersCfg = config.modules.base.users;
@@ -19,8 +19,9 @@ in
 
     extraSpecialArgs = {
       inherit pkgs-unstable;
-      inherit version;
       inherit hostname user;
+
+      version = config.modules.base.version;
     };
   };
 }

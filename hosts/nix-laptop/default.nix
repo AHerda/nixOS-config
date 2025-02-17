@@ -10,6 +10,7 @@
       bootLoader.enable = true;
       networkmanager.enable = true;
       users.${user.userName}.enable = true;
+      version = "24.05";
     };
 
     hardware = {
@@ -25,8 +26,10 @@
       hypr.enable = true;
       notifications.enable = true;
       sddm.enable = true;
-      virtualisation.enable = true;
-      virtualisation.program = "both";
+      virtualisation = {
+        enable = false;
+        program = "both";
+      };
     };
   };
 }
