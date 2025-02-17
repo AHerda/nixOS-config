@@ -11,10 +11,9 @@
       networkmanager.enable = true;
       users.${user.userName}.enable = true;
       proxy = {
-        enable = false;
-        url = "http://10.158.100.2:8080";
+        enable = true;
+        url = "http://10.158.100.1:8080";
         noProxyUrls = "127.0.0.0/8, localhost, .nokia.net, .nsn-net.net, .nsn-rdnet.net, .ext.net.nokia.com, .int.net.nokia.com, .inside.nsn.com, .inside.nokiasiemensnetworks.com, .emea.nsn-net.net, .nesc.nokia.net, 192.168.49.2";
-        # ToDo: check .nsn-rdnet.net
       };
     };
 

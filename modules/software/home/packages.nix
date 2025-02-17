@@ -17,7 +17,6 @@
     # user programs
     pkgs-unstable.neovim
     lazygit
-    pkgs-unstable.ollama
 
     # Applications
     telegram-desktop

@@ -9,7 +9,6 @@ in
     enable = lib.mkEnableOption "${name}";
   };
 
-
   config = lib.mkMerge [
     ({
       users.defaultUserShell = pkgs.bash;

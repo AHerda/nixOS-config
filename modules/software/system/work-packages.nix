@@ -13,12 +13,9 @@ in
             pkgs-unstable.libreoffice
             pkgs-unstable.intune-portal
             openconnect
+            globalprotect-openconnect
             meld
             openssl
-            # podman
-            # docker
         ];
-
-        # virtualisation.docker.enable = true;
     };
 }

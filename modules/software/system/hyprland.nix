@@ -20,6 +20,7 @@ in
       hypridle
       hyprpaper
       waybar
+      wl-clipboard
     ];
   };
 }

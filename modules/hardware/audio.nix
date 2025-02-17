@@ -12,6 +12,7 @@ in
     environment.systemPackages = [
       pkgs.pulseaudio-ctl
       pkgs.libinput
+      pkgs.pavucontrol
     ];
     hardware.pulseaudio.enable = true;
     services.pipewire.audio.enable = false;

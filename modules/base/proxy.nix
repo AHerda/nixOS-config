@@ -1,7 +1,7 @@
-{ config, lib, types, ... }:
+{ config, lib, ... }:
 
 let
-  urlType = types.strMatching "^https?://.*(:[0-9]+)?$";
+  urlType = lib.types.strMatching "^https?://.*(:[0-9]+)?$";
   cfg = config.modules.base.proxy;
 in
 {
@@ -12,7 +12,7 @@ in
       description = "The proxy URL to use for network connections.";
     };
     noProxyUrls = lib.mkOption {
-      type = types.commas;
+      type = lib.types.commas;
       description = "The URLs to not use proxy for.";
     };
   };

@@ -21,6 +21,8 @@ in
         wofi
         libsForQt5.dolphin
         feh
+        nwg-drawer
+        # inputs.zen-browser.packages."${system}".default
 
         # terminal
         pkgs-unstable.alacritty
