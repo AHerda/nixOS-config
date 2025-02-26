@@ -30,6 +30,7 @@
       guiApps.enable = true;
       hypr.enable = true;
       notifications.enable = true;
+      office.enable = true;
       sddm.enable = false;
       workPackages.enable = true;
       virtualisation = {

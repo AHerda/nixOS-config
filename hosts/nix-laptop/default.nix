@@ -25,6 +25,7 @@
       guiApps.enable = true;
       hypr.enable = true;
       notifications.enable = true;
+      office.enable = true;
       sddm.enable = true;
       virtualisation = {
         enable = false;

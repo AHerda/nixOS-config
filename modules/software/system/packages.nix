@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, inputs, lib, pkgs, pkgs-unstable, system, ... }:
 
 let
   cfg = config.modules.software.guiApps;
@@ -22,7 +22,7 @@ in
         libsForQt5.dolphin
         feh
         nwg-drawer
-        # inputs.zen-browser.packages."${system}".default
+        inputs.zen-browser.packages."${system}".default
 
         # terminal
         pkgs-unstable.alacritty

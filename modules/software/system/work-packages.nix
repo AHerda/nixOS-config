@@ -10,7 +10,6 @@ in
 
     config = lib.mkIf cfg.enable {
         environment.systemPackages = with pkgs; [
-            pkgs-unstable.libreoffice
             pkgs-unstable.intune-portal
             openconnect
             globalprotect-openconnect
