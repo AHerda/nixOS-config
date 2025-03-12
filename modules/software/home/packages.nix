@@ -15,11 +15,12 @@
     stow
 
     # user programs
-    pkgs-unstable.neovim
+    # pkgs-unstable.neovim
     lazygit
 
     # Applications
     telegram-desktop
     pkgs-unstable.spotify
+    pkgs-unstable.obsidian
   ];
 }

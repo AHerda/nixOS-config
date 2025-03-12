@@ -26,7 +26,7 @@
       hypr.enable = true;
       notifications.enable = true;
       office.enable = true;
-      sddm.enable = true;
+      sddm.enable = false;
       virtualisation = {
         enable = false;
         program = "both";

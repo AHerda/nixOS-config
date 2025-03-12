@@ -11,7 +11,7 @@ in
     ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/hypr";
     ".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/ghostty";
     ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/kitty";
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/nvim";
+    # ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/nvim";
     ".config/nushell".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/nushell";
     ".config/rofi".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/rofi";
     ".config/oh-my-posh".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/oh-my-posh";

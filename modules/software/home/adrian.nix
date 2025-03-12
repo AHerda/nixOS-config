@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./nixvim
     ./dotfiles.nix
     ./git.nix
     ./packages.nix

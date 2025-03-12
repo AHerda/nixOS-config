@@ -18,7 +18,7 @@ in
     useUserPackages = true;
 
     extraSpecialArgs = {
-      inherit pkgs-unstable;
+      inherit inputs pkgs-unstable;
       inherit hostname user;
 
       version = config.modules.base.version;
