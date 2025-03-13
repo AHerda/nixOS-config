@@ -15,6 +15,8 @@ in
             globalprotect-openconnect
             meld
             openssl
+            gtk2
+            gtk2-x11
         ];
     };
 }

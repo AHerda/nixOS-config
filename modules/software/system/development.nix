@@ -1,6 +1,7 @@
 { pkgs, pkgs-unstable, ... }:
 
 {
+  programs.nix-ld.enable = true;
   environment.systemPackages = with pkgs; [
     # languages / compilers
     eww
