@@ -1,4 +1,4 @@
-{ config, user, ... }:
+{ user, ... }:
 
 {
   imports = [
@@ -24,6 +24,7 @@
     software = {
       guiApps.enable = true;
       hypr.enable = true;
+      niri.enable = false;
       notifications.enable = true;
       office.enable = true;
       sddm.enable = false;

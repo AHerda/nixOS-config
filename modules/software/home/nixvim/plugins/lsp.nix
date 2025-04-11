@@ -12,7 +12,19 @@ _:
             servers = {
                 cmake.enable = true;
                 clangd.enable = true;
-                nil_ls.enable = true;
+                nixd.enable = true;
+                nushell.enable = true;
+                rust_analyzer = {
+                    enable = true;
+                    installCargo = true;
+                    installRustc = true;
+                };
+                tinymist = {
+                    enable = true;
+                    extraOptions = {
+                        offset_encoding = "utf-8";
+                    };
+                };
             };
         };
     };

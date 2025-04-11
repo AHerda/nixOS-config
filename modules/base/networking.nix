@@ -9,14 +9,14 @@ in
   };
 
   config = lib.mkMerge [
-    ({
+    {
       networking.hostName = hostname;
       networking.firewall = {
         enable = lib.mkDefault true;
-        allowedTCPPorts = [ 8080 57621 ];
-        allowedUDPPorts = [ 5353 ];
+        allowedTCPPorts = [ 22 80 ];
+        allowedUDPPorts = [ ];
       };
-    })
+    }
     (lib.mkIf cfg.enable {
       environment.systemPackages = [
         pkgs.networkmanagerapplet

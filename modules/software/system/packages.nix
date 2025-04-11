@@ -12,6 +12,7 @@ in
     (lib.mkIf cfg.enable {
       programs = {
         firefox.enable = true;
+        thunar.enable = true;
       };
 
       environment.systemPackages = with pkgs; [
@@ -39,6 +40,7 @@ in
       environment.systemPackages = with pkgs; [
         bash
         nushell
+        tdf
       ];
     })
   ];

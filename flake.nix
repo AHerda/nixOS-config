@@ -8,12 +8,16 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixvim = {
       url = "github:nix-community/nixvim/nixos-24.11";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, ... }@inputs:
@@ -39,10 +43,14 @@
     {
       nixosConfigurations = {
         nix-laptop = nixosSystem "nix-laptop" (inheritImportant {});
+          # { additionalModules = [ inputs.nixos-hardware.nixosModules.microsoft-surface-pro-9 ]; });
         work-laptop = nixosSystem "work-laptop" (inheritImportant
           { additionalModules = [ inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14 ]; });
         normalIso = nixosSystem "normalIso" (inheritImportant {});
         serverIso = nixosSystem "serverIso" (inheritImportant {});
+      };
+      devShells.${system} = import ./modules/shells.nix {
+        pkgs = pkgs-unstable;
       };
     };
 }

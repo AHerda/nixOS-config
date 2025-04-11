@@ -17,10 +17,11 @@
     # user programs
     # pkgs-unstable.neovim
     lazygit
+    typst
 
     # Applications
     telegram-desktop
     pkgs-unstable.spotify
-    pkgs-unstable.obsidian
+    # pkgs-unstable.obsidian
   ];
 }

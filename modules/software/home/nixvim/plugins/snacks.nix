@@ -5,6 +5,7 @@ _:
     plugins = {
         snacks = {
           settings = {
+            lazygit.enable = true;
             picker = {
               actions.__raw = ''require("trouble.sources.snacks").actions'';
               matcher = {
@@ -51,14 +52,14 @@ _:
         };
       };
       keymaps = [
-        {
-          mode = "n";
-          key = "<leader>gg";
-          action = ":lua Snacks.lazygit.open()<CR>";
-          options = {
-            desc = "Open LazyGit";
-          };
-        }
+        # {
+        #   mode = "n";
+        #   key = "<leader>gg";
+        #   action = ":lua Snacks.lazygit.open()<cr>";
+        #   options = {
+        #     desc = "Open LazyGit";
+        #   };
+        # }
         {
           mode = "n";
           key = "<leader>fa";

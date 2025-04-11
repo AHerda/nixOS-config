@@ -5,6 +5,7 @@ _:
     ./development.nix
     ./fonts.nix
     ./hyprland.nix
+    ./niri.nix
     ./notifications.nix
     ./office.nix
     ./packages.nix

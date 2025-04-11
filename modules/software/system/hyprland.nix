@@ -10,16 +10,21 @@ in
 
   config = lib.mkIf cfg.enable {
     # configure hyprland
-    programs.hyprland = {
-      enable = true;
-      xwayland.enable = true;
+    programs = {
+      hyprland = {
+        enable = true;
+        xwayland.enable = true;
+      };
+      hyprlock.enable = true;
+      waybar.enable = true;
     };
+    services.hypridle.enable = true;
 
     environment.systemPackages = with pkgs; [
-      hyprlock
-      hypridle
+      # hyprlock
+      # hypridle
       hyprpaper
-      waybar
+      # waybar
       wl-clipboard
     ];
   };

@@ -9,9 +9,10 @@
 
   nix.gc = {
     automatic = lib.mkDefault true;
-    dates = lib.mkDefault "weekly";
-    options = lib.mkDefault "--delete-older-than 7d";
+    dates = lib.mkDefault "18:10";
+    options = lib.mkDefault "--delete-older-than 1d";
   };
 
+  # only for big storage, take a lot of storage to use that
   nix.settings.auto-optimise-store = true;
 }

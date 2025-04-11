@@ -3,6 +3,16 @@ _:
 {
     programs.nixvim.plugins.blink-cmp = {
         enable = true;
-        # setupLspCapabilities = true;
+        settings = {
+            sources.default = [
+                "lsp"
+                "path"
+                "snippets"
+                "buffer"
+            ];
+            keymap = {
+                preset = "enter";
+            };
+        };
     };
 }
