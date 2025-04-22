@@ -26,5 +26,6 @@ _:
     programs.nixvim.plugins = {
         lz-n.enable = true;
         web-devicons.enable = true;
+        clangd-extensions.enable = true;
     };
 }

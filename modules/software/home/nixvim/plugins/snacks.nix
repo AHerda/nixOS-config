@@ -4,10 +4,11 @@ _:
   programs.nixvim = {
     plugins = {
         snacks = {
+          enable = true;
           settings = {
             lazygit.enable = true;
             picker = {
-              actions.__raw = ''require("trouble.sources.snacks").actions'';
+              # actions.__raw = ''require("trouble.sources.snacks").actions'';
               matcher = {
                 frecency = true;
               };
@@ -191,7 +192,7 @@ _:
         }
         {
           mode = "n";
-          key = "<leader><space>";
+          key = "<leader>f<space>";
           action = ''<cmd>lua Snacks.picker.files()<cr>'';
           options = {
             desc = "Find files";

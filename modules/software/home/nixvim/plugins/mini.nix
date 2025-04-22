@@ -23,13 +23,13 @@ _:
             };
             surround = {
                 mappings = {
-                    add = "gsa";
-                    delete = "gsd";
-                    find = "gsf";
-                    find_left = "gsF";
-                    highlight = "gsh";
-                    replace = "gsr";
-                    update_n_lines = "gsn";
+                    add = "msa";
+                    delete = "msd";
+                    find = "msf";
+                    find_left = "msF";
+                    highlight = "msh";
+                    replace = "msr";
+                    update_n_lines = "msn";
                 };
             };
         };

@@ -3,9 +3,13 @@
 {
   fonts.packages = with pkgs; [
     font-awesome
-    fira-code
-    fira-code-symbols
-    # nerdfonts
-    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+    (nerdfonts.override {
+      fonts = [
+        "NerdFontsSymbolsOnly"
+        "JetBrainsMono"
+        "FiraCode"
+        "FiraMono"
+      ];
+    })
   ];
 }

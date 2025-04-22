@@ -24,10 +24,26 @@ in {
   c = nixosShell "c" {
     inherit pkgs;
     packages = with pkgs; [
-      gcc
       clang
+      clang-analyzer
+      clang-tools
       cmake
+      gcc
       gnumake
+      libclang
+      libgcc
+    ];
+  };
+  x11docker = nixosShell "x11docker" {
+    inherit pkgs;
+    packages = with pkgs; [
+      jq
+      python313
+      tini
+      x11docker
+      xorg.xorgserver
+      xorg.xrandr
+      xpra
     ];
   };
 }

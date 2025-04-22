@@ -3,13 +3,14 @@ _:
 {
     programs.nixvim.plugins = {
         lsp-format = {
-            enable = true;
+            enable = false;
             lspServersToEnable = "all";
         };
 
         lsp = {
             enable = true;
             servers = {
+                # ccls.enable = true;
                 cmake.enable = true;
                 clangd.enable = true;
                 nixd.enable = true;
