@@ -20,7 +20,7 @@ in
         # rofi
         rofi-wayland
         wofi
-        libsForQt5.dolphin
+        pcmanfm
         feh
         nwg-drawer
         inputs.zen-browser.packages."${system}".default

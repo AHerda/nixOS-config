@@ -8,59 +8,23 @@ _:
           settings = {
             lazygit.enable = true;
             picker = {
-              # actions.__raw = ''require("trouble.sources.snacks").actions'';
+              enabled = true;
               matcher = {
                 frecency = true;
               };
-              win = {
-                input = {
-                  keys.__raw = ''
-                    {
-                      ["<c-t>"] = {
-                        "trouble_open",
-                        mode = { "n", "i" },
-                      },
-                    }
-                  '';
-                };
-              };
-              layouts.default.__raw = ''
-                {
-                  reverse = true,
-                  layout = {
-                    box = "horizontal",
-                    backdrop = true,
-                    width = 0.8,
-                    height = 0.9,
-                    border = "none",
-                    {
-                      box = "vertical",
-                      { win = "list", title = " Results ", title_pos = "center", border = "rounded" },
-                      { win = "input", height = 1, border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
-                    },
-                    {
-                      win = "preview",
-                      title = "{preview:Preview}",
-                      width = 0.45,
-                      border = "rounded",
-                      title_pos = "center",
-                    },
-                  },
-                }
-              '';
             };
           };
         };
       };
       keymaps = [
-        # {
-        #   mode = "n";
-        #   key = "<leader>gg";
-        #   action = ":lua Snacks.lazygit.open()<cr>";
-        #   options = {
-        #     desc = "Open LazyGit";
-        #   };
-        # }
+        {
+          mode = "n";
+          key = "<leader>gg";
+          action = "<cmd>lua Snacks.lazygit.open()<cr>";
+          options = {
+            desc = "Open LazyGit";
+          };
+        }
         {
           mode = "n";
           key = "<leader>fa";

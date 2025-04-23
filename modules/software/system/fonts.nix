@@ -5,10 +5,10 @@
     font-awesome
     (nerdfonts.override {
       fonts = [
-        "NerdFontsSymbolsOnly"
-        "JetBrainsMono"
         "FiraCode"
         "FiraMono"
+        "JetBrainsMono"
+        "NerdFontsSymbolsOnly"
       ];
     })
   ];
