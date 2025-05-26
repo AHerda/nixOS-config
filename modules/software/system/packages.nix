@@ -18,11 +18,13 @@ in
       environment.systemPackages = with pkgs; [
         # Desktop
         # rofi
+        feh
+        libsForQt5.dolphin
+        loupe
+        nwg-drawer
+        pcmanfm
         rofi-wayland
         wofi
-        pcmanfm
-        feh
-        nwg-drawer
         inputs.zen-browser.packages."${system}".default
 
         # terminal
@@ -31,7 +33,7 @@ in
         pkgs-unstable.ghostty
       ];
     })
-    ({
+    {
       programs = {
         yazi.enable = true;
         zsh.enable = true;
@@ -42,6 +44,6 @@ in
         nushell
         tdf
       ];
-    })
+    }
   ];
 }

@@ -30,7 +30,7 @@
       rebuild="sudo nixos-rebuild switch --flake ~/nixos";
       rebuild-test="sudo nixos-rebuild test --flake ~/nixos";
     };
-    initExtra = ''
+    initContent = ''
       # export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
       eval "$(zoxide init zsh)"
       eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/my-theme.toml)"

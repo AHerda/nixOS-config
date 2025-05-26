@@ -2,14 +2,20 @@
 
 {
   environment.systemPackages = with pkgs; [
+    # system monitoring
     btop
-    usbutils
-    curl
-    git
     htop
+    nix-index
+    tree
+
+    # system managing
     killall
     mc
-    tree
+
+    # VIProgramms
+    curl
+    git
+    usbutils
     unzip
     vim
     wget

@@ -14,7 +14,7 @@ in
       pkgs.libinput
       pkgs.pavucontrol
     ];
-    hardware.pulseaudio.enable = true;
+    services.pulseaudio.enable = true;
     services.pipewire.audio.enable = false;
     services.pipewire.enable = false;
   };

@@ -13,12 +13,8 @@ in
     services.gvfs.enable = true;
     services.udisks2.enable = true;
 
-      services.udev.extraRules = ''
-        ACTION=="add",
-        SUBSYSTEM=="usb",
-        ATTR{idVendor}=="0bda",
-        ATTR{idProduct}=="8153",
-        ATTR{power/autosuspend}=="20"
-      '';
+    # services.udev.extraRules = ''
+    #   ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", ATTR{idProduct}=="8153", ATTR{power/autosuspend}=="20"
+    # '';
   };
 }
