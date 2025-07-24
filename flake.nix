@@ -18,9 +18,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    raspberry-pi-nix = {
+      url = "github:nix-community/raspberry-pi-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, raspberry-pi-nix, ... }@inputs:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
@@ -38,6 +42,7 @@
           config = {
             allowUnfreePredicate = pkg:
               builtins.elem (lib.getName pkg) unfree;
+            permittedInsecurePackages = [ "jujutsu-0.23.0" ];
           };
         };
       };
@@ -48,6 +53,7 @@
         work-laptop = nixosSystem "work-laptop" (inheritImportant { inherit system; });
         normalIso = nixosSystem "normalIso" (inheritImportant { inherit system; });
         serverIso = nixosSystem "serverIso" (inheritImportant { inherit system; });
+        nix-pi = nixosSystem "nix-pi" (inheritImportant { system = "aarch64-linux"; });
       };
       devShells.${system} = nixShells {
         pkgs = import nixpkgs-unstable { inherit system; };

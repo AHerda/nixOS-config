@@ -30,6 +30,10 @@
       };
       version = "24.11"; # version at which this machine started, dont change
       security.doas = true;
+      emulatedSystems = {
+        enable = true;
+        systems = [ "aarch64-linux" ];
+      };
     };
 
     hardware = {
