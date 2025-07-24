@@ -8,12 +8,10 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixvim = {
       url = "github:nix-community/nixvim/nixos-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
     };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -27,34 +25,32 @@
       system = "x86_64-linux";
       lib = nixpkgs.lib;
       nixosSystem = import ./lib/nixosConfig.nix;
+      nixShells = import ./shells/default.nix;
       unfree = import ./lib/unfree.nix {};
-      pkgs = import nixpkgs {
+      inheritImportant = {system}: {
+        inherit inputs lib;
         inherit system;
-      };
-      pkgs-unstable = import nixpkgs-unstable {
-        inherit system;
-        config = {
-          allowUnfreePredicate = pkg:
-            builtins.elem (lib.getName pkg) unfree;
+        pkgs = import nixpkgs {
+          inherit system;
         };
-      };
-      inheritImportant = {additionalModules ? []}: {
-        inherit inputs lib pkgs pkgs-unstable;
-        inherit additionalModules;
-        inherit system;
+        pkgs-unstable = import nixpkgs-unstable {
+          inherit system;
+          config = {
+            allowUnfreePredicate = pkg:
+              builtins.elem (lib.getName pkg) unfree;
+          };
+        };
       };
     in
     {
       nixosConfigurations = {
-        nix-laptop = nixosSystem "nix-laptop" (inheritImportant {});
-          # { additionalModules = [ inputs.nixos-hardware.nixosModules.microsoft-surface-pro-9 ]; });
-        work-laptop = nixosSystem "work-laptop" (inheritImportant
-          { additionalModules = [ inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14 ]; });
-        normalIso = nixosSystem "normalIso" (inheritImportant {});
-        serverIso = nixosSystem "serverIso" (inheritImportant {});
+        nix-laptop = nixosSystem "nix-laptop" (inheritImportant { inherit system; });
+        work-laptop = nixosSystem "work-laptop" (inheritImportant { inherit system; });
+        normalIso = nixosSystem "normalIso" (inheritImportant { inherit system; });
+        serverIso = nixosSystem "serverIso" (inheritImportant { inherit system; });
       };
-      devShells.${system} = import ./modules/shells.nix {
-        pkgs = pkgs-unstable;
+      devShells.${system} = nixShells {
+        pkgs = import nixpkgs-unstable { inherit system; };
       };
     };
 }
