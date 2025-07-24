@@ -5,6 +5,7 @@
     # languages / compilers
     eww
     julia
+    pkgs-unstable.quickshell
 
     # uni apps
     # pkgs-unstable.wolfram-engine

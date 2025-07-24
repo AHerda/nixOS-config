@@ -1,8 +1,9 @@
-{ config, user, ... }:
+{ inputs, user, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14
   ];
 
   config.modules = {
@@ -15,7 +16,7 @@
         url = "http://10.158.100.1:8080";
         noProxyUrls = "127.0.0.0/8, localhost, .nokia.net, .nsn-net.net, .nsn-rdnet.net, .ext.net.nokia.com, .int.net.nokia.com, .inside.nsn.com, .inside.nokiasiemensnetworks.com, .emea.nsn-net.net, .nesc.nokia.net, 192.168.49.2";
       };
-      version = "24.11";
+      version = "24.11"; # version at which this machine started, dont change
       security.doas = true;
     };
 

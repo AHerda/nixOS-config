@@ -8,8 +8,8 @@
     ./nix.nix
     ./osSettings.nix
     ./packages.nix
+    ./printing.nix
     ./proxy.nix
-    ./services.nix
     ./security.nix
     ./ssh.nix
     ./users.nix

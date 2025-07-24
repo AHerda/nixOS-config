@@ -2,7 +2,7 @@
 
 {
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
     trusted-users = []
       ++ lib.optionals (config.modules.base.users.${user.userName}.enable) [ user.userName ];
   };

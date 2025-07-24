@@ -10,8 +10,8 @@ in
 
   config = lib.mkIf cfg.enable {
     hardware.bluetooth.enable = true;
+    services.blueman.enable = true;
     environment.systemPackages = [
-      pkgs.blueman
       pkgs.bluez
     ];
   };

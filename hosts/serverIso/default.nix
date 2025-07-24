@@ -1,11 +1,11 @@
-{ config, modulesPath, system, ... }:
+{ config, modulesPath, ... }:
 
 {
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
   ];
 
-  config.nixpkgs.hostPlatform = system;
+  # config.nixpkgs.hostPlatform = "x86_64-linux";
 
   config.modules = {
     hardware = {

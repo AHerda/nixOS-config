@@ -1,11 +1,11 @@
-{ config, modulesPath, system, ... }:
+{ config, modulesPath, ... }:
 
 {
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares.nix"
   ];
 
-  config.nixpkgs.hostPlatform = system;
+  # config.nixpkgs.hostPlatform = system;
 
   config.modules = {
     base = {

@@ -1,7 +1,8 @@
-{ config, lib }:
+{ config, lib, ... }:
 
 let
   cfg = config.software.ai;
+  cfg = config.modules.software.ai;
 in
 {
   options.modules.software.ai = {

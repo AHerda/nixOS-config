@@ -19,6 +19,7 @@ in
         virtualisation.docker.enable = true;
         environment.systemPackages = [
           pkgs.lazydocker
+	  pkgs.distrobox
         ];
       })
       (lib.mkIf (builtins.elem cfg.program [ "podman" "both" ]) {

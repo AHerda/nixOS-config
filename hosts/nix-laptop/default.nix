@@ -1,8 +1,9 @@
-{ user, ... }:
+{ inputs, user, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
+    # inputs.nixos-hardware.nixosModules.microsoft-surface-pro-9
   ];
 
   config.modules = {

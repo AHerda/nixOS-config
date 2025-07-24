@@ -23,5 +23,5 @@ in
     modules = [
       ../hosts/${name}
       ../modules
-    ] ++ additionalModules;
+    ];
   }
