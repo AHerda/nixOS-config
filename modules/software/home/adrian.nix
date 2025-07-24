@@ -7,6 +7,7 @@
     ./git.nix
     ./packages.nix
     ./tmux.nix
+    # ./xdg.nix
     ./zsh.nix
   ];
 

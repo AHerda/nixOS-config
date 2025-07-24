@@ -10,7 +10,19 @@
     base = {
       bootLoader.enable = true;
       networkmanager.enable = true;
-      users.${user.userName}.enable = true;
+      users.${user.userName} = {
+        enable = true;
+        groups = [
+          "audio"
+          "docker"
+          "media"
+          "networkmanager"
+          "surface-control"
+          "video"
+          "wheel"
+        ];
+        description = user.fullName;
+      };
       version = "24.05";
     };
 

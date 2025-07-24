@@ -1,33 +1,45 @@
-{ config, lib, pkgs, user, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.modules.base.users;
-  name = user.userName;
-in
-{
-  options.modules.base.users.${name} = {
-    enable = lib.mkEnableOption "${name}";
+  userOpts = _: {
+    options = {
+      enable = lib.mkEnableOption "If set to false the user will not be created";
+      description = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Description of user";
+      };
+      groups = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+        description = "List of user additional groups";
+      };
+    };
+  };
+in {
+  options.modules.base.users = lib.mkOption {
+    type = lib.types.attrsOf (lib.types.submodule userOpts);
+    default = {};
+    description = "Users to create";
   };
 
   config = lib.mkMerge [
-    ({
+    {
       users.defaultUserShell = pkgs.bash;
-    })
-    (lib.mkIf cfg.${name}.enable {
-      users.users.${name} = {
-        isNormalUser = true;
-        description = user.fullName;
-        extraGroups = [
-          "audio"
-          "docker"
-          "media"
-          "networkmanager"
-          "surface-control"
-          "video"
-          "wheel"
-        ];
-        shell = pkgs.zsh;
-      };
-    })
+      users.users.root.initialPassword = "root";
+    }
+    {
+      users.users = lib.attrsets.filterAttrs (_: value: value.enable) cfg
+        |> lib.attrsets.concatMapAttrs (name: value: {
+          ${name} = {
+            isNormalUser = true;
+            description = value.description;
+            extraGroups = value.groups;
+            shell = pkgs.zsh;
+            initialPassword = "${name}";
+          };
+        });
+    }
   ];
 }

@@ -10,7 +10,19 @@
     base = {
       bootLoader.enable = true;
       networkmanager.enable = true;
-      users.${user.userName}.enable = true;
+      users.${user.userName} = {
+        enable = true;
+        groups = [
+          "audio"
+          "docker"
+          "media"
+          "networkmanager"
+          "surface-control"
+          "video"
+          "wheel"
+        ];
+        description = user.fullName;
+      };
       proxy = {
         enable = true;
         url = "http://10.158.100.1:8080";
@@ -29,7 +41,9 @@
     };
 
     software = {
+      ai.enable = false;
       guiApps.enable = true;
+      home-manager.enable = true;
       hypr.enable = true;
       notifications.enable = true;
       office.enable = true;

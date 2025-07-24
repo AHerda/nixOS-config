@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, user, ... }:
+{ pkgs, pkgs-unstable, ... }:
 
 {
   programs.zsh = {

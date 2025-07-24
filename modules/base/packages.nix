@@ -4,6 +4,8 @@
   environment.systemPackages = with pkgs; [
     # system monitoring
     btop
+    dua     # testing
+    dust    # tetsing
     htop
     nix-index
     tree
