@@ -10,6 +10,7 @@
     raspberry-pi-nix.board = "bcm2712";
     modules = {
       base = {
+        netowrkmanager.enable = true;
         # raspberryPi = {
         #   enable = true;
         #   board = "bcm2712";
@@ -21,18 +22,14 @@
         users.${user.userName} = {
           enable = true;
           groups = [
-            "audio"
-            "docker"
-            "media"
             "networkmanager"
-            "surface-control"
-            "video"
             "wheel"
           ];
           description = user.fullName;
         };
         version = "25.05";
       };
+      software.home-manager.enable = true;
     };
   };
 }

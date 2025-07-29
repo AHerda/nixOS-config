@@ -6,6 +6,7 @@ in
 {
   options.modules.base.networkmanager = {
     enable = lib.mkEnableOption "networkmanager";
+    gui.enable = lib.mkEnableOption "Gui for Network Manager";
   };
 
   config = lib.mkMerge [
@@ -18,11 +19,10 @@ in
       };
     }
     (lib.mkIf cfg.enable {
-      environment.systemPackages = [
-        pkgs.networkmanagerapplet
-      ];
-
       networking.networkmanager.enable = true;
+    })
+    (lib.mkIf cfg.gui.enable {
+      programs.nm-applet.enable = true;
     })
   ];
 }
