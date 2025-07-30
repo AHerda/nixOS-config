@@ -9,7 +9,10 @@
   config.modules = {
     base = {
       bootLoader.enable = true;
-      networkmanager.enable = true;
+      networkmanager = {
+        enable = true;
+        gui.enable = true;
+      };
       users.${user.userName} = {
         enable = true;
         groups = [

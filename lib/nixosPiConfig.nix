@@ -9,7 +9,7 @@ let
     userEmail = data.userEmail;
   };
 in
-  lib.nixosSystem {
+  inputs.nixos-raspberrypi.lib.nixosSystem {
     inherit pkgs lib;
 
     specialArgs = {

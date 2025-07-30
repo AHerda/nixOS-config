@@ -4,19 +4,26 @@ let
   cfg = config.modules.base.raspberryPi;
 in {
   options.modules.base.raspberryPi = {
-    enable = lib.mkEnableOption "raspberryPi";
-    board = lib.mkOption {
-      type = lib.types.str;
-      description = "Board type used in host model";
-    };
+    enable = lib.mkEnableOption "Enable raspberryPi 5 specific filesystem config";
   };
 
-  imports = [
-    inputs.raspberry-pi-nix.nixosModules.raspberry-pi
-    inputs.raspberry-pi-nix.nixosModules.sd-image
-  ];
-
   config = lib.mkIf cfg.enable {
-    raspberry-pi-nix.board = cfg.board;
+    fileSystems = {
+      "/boot/firmware" = {
+        device = "/dev/disk/by-uuid/2175-794E";
+        fsType = "vfat";
+        options = [
+          "noatime"
+          "noauto"
+          "x-systemd.automount"
+          "x-systemd.idle-timeout=1min"
+        ];
+      };
+      "/" = {
+        device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
+        fsType = "ext4";
+        options = [ "noatime" ];
+      };
+    };
   };
 }

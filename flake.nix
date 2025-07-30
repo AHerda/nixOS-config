@@ -1,6 +1,15 @@
 {
   description = "NixOs configuration flake";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://nixos-raspberrypi.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -18,17 +27,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    raspberry-pi-nix = {
-      url = "github:nix-community/raspberry-pi-nix";
+    nixos-raspberrypi = {
+      url = "github:nvmd/nixos-raspberrypi/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, raspberry-pi-nix, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, nixos-raspberrypi, ... }@inputs:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
       nixosSystem = import ./lib/nixosConfig.nix;
+      nixosPiSystem = import ./lib/nixosPiConfig.nix;
       nixShells = import ./shells/default.nix;
       unfree = import ./lib/unfree.nix {};
       inheritImportant = {system}: {
@@ -53,7 +63,7 @@
         work-laptop = nixosSystem "work-laptop" (inheritImportant { inherit system; });
         normalIso = nixosSystem "normalIso" (inheritImportant { inherit system; });
         serverIso = nixosSystem "serverIso" (inheritImportant { inherit system; });
-        nix-pi = nixosSystem "nix-pi" (inheritImportant { system = "aarch64-linux"; });
+        nix-pi = nixosPiSystem "nix-pi" (inheritImportant { system = "aarch64-linux"; });
       };
       devShells.${system} = nixShells {
         pkgs = import nixpkgs-unstable { inherit system; };

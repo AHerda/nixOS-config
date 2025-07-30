@@ -2,15 +2,15 @@
 
 {
   imports = [
-    inputs.raspberry-pi-nix.nixosModules.raspberry-pi
-    inputs.raspberry-pi-nix.nixosModules.sd-image
+    inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.base
+    inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
   ];
 
   config = {
     raspberry-pi-nix.board = "bcm2712";
     modules = {
       base = {
-        netowrkmanager.enable = true;
+        networkmanager.enable = true;
         # raspberryPi = {
         #   enable = true;
         #   board = "bcm2712";
@@ -29,7 +29,9 @@
         };
         version = "25.05";
       };
-      software.home-manager.enable = true;
+      software = {
+        home-manager.enable = true;
+      };
     };
   };
 }

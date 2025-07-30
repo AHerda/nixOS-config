@@ -2,11 +2,10 @@
 
 let
   cfg = config.modules.base.networkmanager;
-in
-{
+in {
   options.modules.base.networkmanager = {
     enable = lib.mkEnableOption "networkmanager";
-    gui.enable = lib.mkEnableOption "Gui for Network Manager";
+    gui.enable = lib.mkEnableOption "GUI for Network Manager";
   };
 
   config = lib.mkMerge [
