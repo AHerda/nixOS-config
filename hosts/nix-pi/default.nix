@@ -7,14 +7,12 @@
   ];
 
   config = {
-    raspberry-pi-nix.board = "bcm2712";
     modules = {
       base = {
         networkmanager.enable = true;
-        # raspberryPi = {
-        #   enable = true;
-        #   board = "bcm2712";
-        # };
+        raspberryPi = {
+          enable = true;
+        };
         ssh.openssh = {
           enable = true;
           byKeys = false;

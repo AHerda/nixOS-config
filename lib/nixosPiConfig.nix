@@ -16,6 +16,7 @@ in
       inherit inputs pkgs-unstable;
       inherit system;
       inherit hostname user;
+      nixos-raspberrypi = inputs.nixos-raspberrypi;
     };
 
     modules = [
