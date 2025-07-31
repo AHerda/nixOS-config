@@ -28,8 +28,8 @@ in
             (map normal "<C-w>j" "<C-j>" "Tab Down")
             (map normal "<C-w>k" "<C-k>" "Tab Up")
             (map normal "<C-w>l" "<C-l>" "Tab Right")
-            (map normal "o<ESC>" "n" "New line under cursor")
-            (map normal "O<ESC>" "N" "New line above cursor")
+            (map normal "o<ESC>" "m" "New line under cursor")
+            (map normal "O<ESC>" "M" "New line above cursor")
         ];
     };
 }
