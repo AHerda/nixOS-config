@@ -9,7 +9,7 @@ in {
     enable = lib.mkEnableOption "Enable immich - self-hosted photo and video management solution";
     mediaDir = lib.mkOption {
       type = lib.types.path;
-      default = /var/lib/immich/;
+      default = /var/lib/immich;
       description = "Directory in which the media will be stored";
     };
     port = lib.mkOption {
@@ -20,9 +20,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    immich = {
+    services.immich = {
       enable = true;
-      mediaLocation = "${cfg.mediaDir}";
+      # mediaLocation = "${cfg.mediaDir}";
       port = cfg.port;
     };
     users.users.immich.extraGroups = [

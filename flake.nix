@@ -56,14 +56,13 @@
           };
         };
       };
-    in
-    {
+    in {
       nixosConfigurations = {
         nix-laptop = nixosSystem "nix-laptop" (inheritImportant { inherit system; });
         work-laptop = nixosSystem "work-laptop" (inheritImportant { inherit system; });
         normalIso = nixosSystem "normalIso" (inheritImportant { inherit system; });
         serverIso = nixosSystem "serverIso" (inheritImportant { inherit system; });
-        nix-pi = nixosPiSystem "nix-pi" (inheritImportant { system = "aarch64-linux"; });
+        nix-pi = nixosPiSystem "nix-pi" (inheritImportant { system = system2; });
       };
       devShells.${system} = nixShells {
         pkgs = import nixpkgs-unstable { inherit system; };

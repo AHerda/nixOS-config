@@ -22,5 +22,6 @@ in
     modules = [
       ../hosts/${name}
       ../modules
+      ../homelab
     ];
   }
