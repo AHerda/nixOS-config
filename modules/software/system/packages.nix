@@ -12,17 +12,25 @@ in
     (lib.mkIf cfg.enable {
       programs = {
         firefox.enable = true;
-        thunar.enable = true;
+        thunar = {
+          enable = true;
+          plugins = with pkgs.xfce; [
+            thunar-volman
+            thunar-vcs-plugin
+            thunar-archive-plugin
+            thunar-media-tags-plugin
+          ];
+        };
       };
 
       environment.systemPackages = with pkgs; [
         # Desktop
         # rofi
         feh
-        libsForQt5.dolphin
         loupe
+        nautilus
         nwg-drawer
-        pcmanfm
+        pkgs-unstable.pcmanfm
         rofi-wayland
         wofi
         inputs.zen-browser.packages."${system}".default
@@ -41,7 +49,6 @@ in
 
       environment.systemPackages = with pkgs; [
         bash
-        nushell
         tdf
       ];
     }

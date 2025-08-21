@@ -9,11 +9,13 @@
         "copypath"
         "docker"
         "encode64"
+        "fzf"
         "git"
         "history"
         "rust"
         "sudo"
         "themes"
+        "zoxide"
       ];
     };
     autosuggestion.enable = true;
@@ -32,16 +34,9 @@
     };
     initContent = ''
       # export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
-      eval "$(zoxide init zsh)"
       eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/my-theme.toml)"
     '';
   }; # programs.zsh
-
-  home.packages = with pkgs; [
-    pkgs-unstable.oh-my-posh
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-  ];
 
   home.sessionVariables = {
     ZSH = "${pkgs.oh-my-zsh}/share/oh-my-zsh";

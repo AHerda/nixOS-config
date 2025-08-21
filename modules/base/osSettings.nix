@@ -19,7 +19,7 @@ in
     system.stateVersion = cfg.version;
 
     environment.variables = {
-        EDITOR = "vim";
+        # EDITOR = "vim";
         NIXOS_OZONE_WL=1;
     };
 

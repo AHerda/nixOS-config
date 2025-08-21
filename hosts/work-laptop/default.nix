@@ -1,4 +1,4 @@
-{ inputs, user, ... }:
+{ inputs, pkgs-unstable, user, ... }:
 
 {
   imports = [
@@ -25,6 +25,7 @@
           "wheel"
         ];
         description = user.fullName;
+        shell = pkgs-unstable.nushell;
       };
       proxy = {
         enable = true;

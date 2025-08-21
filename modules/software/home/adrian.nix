@@ -5,6 +5,7 @@
     ./nixvim
     ./dotfiles.nix
     ./git.nix
+    ./nushell.nix
     ./packages.nix
     ./tmux.nix
     # ./xdg.nix

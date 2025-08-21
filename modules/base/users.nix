@@ -15,6 +15,11 @@ let
         default = [];
         description = "List of user additional groups";
       };
+      shell = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.bash;
+        description = "Shell to use as a default";
+      };
     };
   };
 in {
@@ -26,7 +31,7 @@ in {
 
   config = lib.mkMerge [
     {
-      users.defaultUserShell = pkgs.bash;
+      users.defaultUserShell = lib.mkDefault pkgs.bash;
       users.users.root.initialPassword = "root";
     }
     {
@@ -36,7 +41,7 @@ in {
             isNormalUser = true;
             description = value.description;
             extraGroups = value.groups;
-            shell = pkgs.zsh;
+            shell = value.shell;
             initialPassword = "${name}";
           };
         });

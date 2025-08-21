@@ -18,7 +18,10 @@ in {
       };
     }
     (lib.mkIf cfg.enable {
-      networking.networkmanager.enable = true;
+      networking.networkmanager = {
+        enable = true;
+        wifi.backend = "iwd";
+      };
     })
     (lib.mkIf cfg.gui.enable {
       programs.nm-applet.enable = true;
