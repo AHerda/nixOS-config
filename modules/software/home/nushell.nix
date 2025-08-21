@@ -16,6 +16,8 @@
       # update = "let path = (pwd); cd ~/nixos; sudo nix flake update; cd $path";
       rebuild = "sudo nixos-rebuild switch --flake ~/nixos";
       rebuild-test = "sudo nixos-rebuild test --flake ~/nixos";
+
+      # ssh = "TERM=xterm-256color ssh";
     };
 
     settings = {
@@ -29,7 +31,6 @@
         external.max_results = 100;
       };
     };
-
     environmentVariables = {
       EDITOR = "nvim";
     };
