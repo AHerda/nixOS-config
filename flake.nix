@@ -37,6 +37,7 @@
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, nixos-raspberrypi, ... }@inputs:
     let
       system = "x86_64-linux";
+      system2 = "aarch64-linux";
       lib = nixpkgs.lib;
       nixosSystem = import ./lib/nixosConfig.nix;
       nixosPiSystem = import ./lib/nixosPiConfig.nix;

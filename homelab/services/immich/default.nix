@@ -17,17 +17,51 @@ in {
       default = 2283;
       description = "Port to which immich will listen to";
     };
+    host = lib.mkOption {
+      default = "localhost";
+      type = lib.types.str;
+      description = "The host that immich will listen on";
+    };
+    url = lib.mkOption {
+      type = lib.types.strMatching "[a-zA-Z0-9]+(\.[a-zA-Z0-9])*";
+      description = "Url to enter the Immich server";
+      default = "photos.${homelab.baseDomain}";
+    };
+    homepage = {
+      name = lib.mkOption {
+        type = lib.types.str;
+        default = "Immich";
+      };
+      description = lib.mkOption {
+        type = lib.types.str;
+        default = "Self-hosted photo and video management tool";
+      };
+      icon = lib.mkOption {
+        type = lib.types.str;
+        default = "immich.svg";
+      };
+      category = lib.mkOption {
+        type = lib.types.str;
+        default = "Media";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
+    systemd.tmpfiles.rules = [ "d ${cfg.mediaDir} 0775 immich ${homelab.group} - -" ];
     services.immich = {
       enable = true;
-      # mediaLocation = "${cfg.mediaDir}";
+      openFirewall = true;
+      mediaLocation = "${cfg.mediaDir}";
+      host = cfg.host;
       port = cfg.port;
     };
     users.users.immich.extraGroups = [
       "video"
       "render"
     ];
+    services.caddy.virtualHosts."${cfg.url}" = {
+      extraConfig = "reverse_proxy http://${cfg.host}:${toString cfg.port}";
+    };
   };
 }

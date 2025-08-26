@@ -5,8 +5,8 @@ _:
         enable = true;
         settings = {
             highlight.enable = true;
-            auto_install = true;
-            ensure_installed = "all";
+            # auto_install = true;
+            # ensure_installed = "all";
         };
     };
 }

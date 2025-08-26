@@ -1,11 +1,11 @@
 { config, lib, ... }:
 
 let
-  cfg = config.modules.base.ssh;
+  cfg = config.modules.base;
   authorizedKeyFolder = name: /home/${name}/.ssh/authorizedKeys;
   authorizedKeyFile = name: file: /home/${name}/.ssh/authorizedKeys/${file};
-  concatFunction = (name: value: {
-    ${name}.openssh.authorizedKeys.keyFiles = with builtins;
+  concatFunction = (name: _: {
+    openssh.authorizedKeys.keyFiles = with builtins;
       authorizedKeyFolder name |> readDir |> attrNames |> map (file: authorizedKeyFile name file);
   });
 in {
@@ -20,13 +20,13 @@ in {
     {
       programs.ssh.startAgent = true;
     }
-    (lib.mkIf cfg.openssh.enable {
+    (lib.mkIf cfg.ssh.openssh.enable {
       services.openssh.enable = true;
-      users.users = lib.mkIf cfg.openssh.byKeys (lib.attrsets.filterAttrs (_: value: value.enable) cfg.users
-        |> lib.attrsets.concatMapAttrs concatFunction);
     })
-    # (lib.mkIf ( cfg.ssh.openssh.enable && cfg.ssh.openssh.byKeys ) {
-    #   users.users = lib.attrsets.concatMapAttrs (concatFunction cfg.users);
-    # })
+    (lib.mkIf ( cfg.ssh.openssh.enable && cfg.ssh.openssh.byKeys ) {
+      services.openssh.settings.PasswordAuthentication = false;
+      users.users = (lib.attrsets.filterAttrs (_: value: value.enable) cfg.users
+        |> builtins.mapAttrs concatFunction);
+    })
   ];
 }
