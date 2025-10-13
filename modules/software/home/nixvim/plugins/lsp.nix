@@ -25,7 +25,12 @@ _:
                     extraOptions = {
                         offset_encoding = "utf-8";
                     };
+                    settings = {
+                      previewFeature = "enable";
+                      preview.background.enabled = true;
+                    };
                 };
+                qmlls.enable = true;
             };
         };
     };

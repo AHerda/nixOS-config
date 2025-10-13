@@ -13,6 +13,7 @@ in
     programs = {
       hyprland = {
         enable = true;
+        withUWSM = config.modules.software.uwsm.enable;
         xwayland.enable = true;
       };
       hyprlock.enable = true;

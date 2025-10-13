@@ -39,6 +39,9 @@ in
         pkgs-unstable.alacritty
         kitty
         pkgs-unstable.ghostty
+
+        # widgets
+        pkgs-unstable.quickshell
       ];
     })
     {
@@ -50,6 +53,8 @@ in
       environment.systemPackages = with pkgs; [
         bash
         tdf
+        ffmpeg
+        grim
       ];
     }
   ];

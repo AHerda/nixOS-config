@@ -12,6 +12,7 @@ _:
     ./packages.nix
     ./sddm.nix
     ./virtualisation.nix
+    ./uwsm.nix
     ./work-packages.nix
   ];
 }

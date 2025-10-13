@@ -4,9 +4,13 @@
   environment.systemPackages = with pkgs; [
     # system monitoring
     btop
+    glances
+    htop
+    procs
+
     dua     # testing
     dust    # tetsing
-    htop
+
     nix-index
     tree
 
@@ -14,9 +18,11 @@
     killall
     mc
 
+    # VCS
+    git
+
     # VIProgramms
     curl
-    git
     usbutils
     unzip
     vim

@@ -1,4 +1,4 @@
-{ inputs, pkgs-unstable, user, ... }:
+{ inputs, pkgs, lib, user, ... }:
 
 {
   imports = [
@@ -6,61 +6,67 @@
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14
   ];
 
-  config.modules = {
-    base = {
-      bootLoader.enable = true;
-      networkmanager = {
-        enable = true;
-        gui.enable = true;
+  config = {
+    modules = {
+      base = {
+        bootLoader.enable = true;
+        emulatedSystems = {
+          enable = false;
+          systems = [ "aarch64-linux" ];
+        };
+        networkmanager = {
+          enable = true;
+          gui.enable = true;
+        };
+        proxy = {
+          enable = lib.mkDefault true;
+          url = "http://10.158.100.2:8080";
+          noProxyUrls = "127.0.0.0/8, localhost, .nokia.net, .nsn-net.net, .nsn-rdnet.net, .ext.net.nokia.com, .int.net.nokia.com, .inside.nsn.com, .inside.nokiasiemensnetworks.com, .emea.nsn-net.net, .nesc.nokia.net, 192.168.49.2";
+        };
+        security.doas = true;
+        users.${user.userName} = {
+          enable = true;
+          groups = [
+            "audio"
+            "docker"
+            "media"
+            "networkmanager"
+            "surface-control"
+            "video"
+            "wheel"
+          ];
+          description = user.fullName;
+          shell = pkgs.nushell;
+        };
+        version = "24.11"; # version at which this machine started, dont change
       };
-      users.${user.userName} = {
-        enable = true;
-        groups = [
-          "audio"
-          "docker"
-          "media"
-          "networkmanager"
-          "surface-control"
-          "video"
-          "wheel"
-        ];
-        description = user.fullName;
-        shell = pkgs-unstable.nushell;
+
+      hardware = {
+        audio.enable = true;
+        bluetooth.enable = true;
+        brightness.enable = true;
+        touchscreen.enable = false;
+        usb.enable = true;
       };
-      proxy = {
-        enable = true;
-        url = "http://10.158.100.1:8080";
-        noProxyUrls = "127.0.0.0/8, localhost, .nokia.net, .nsn-net.net, .nsn-rdnet.net, .ext.net.nokia.com, .int.net.nokia.com, .inside.nsn.com, .inside.nokiasiemensnetworks.com, .emea.nsn-net.net, .nesc.nokia.net, 192.168.49.2";
-      };
-      version = "24.11"; # version at which this machine started, dont change
-      security.doas = true;
-      emulatedSystems = {
-        enable = true;
-        systems = [ "aarch64-linux" ];
+
+      software = {
+        ai.enable = false;
+        guiApps.enable = true;
+        home-manager.enable = true;
+        hypr.enable = true;
+        niri.enable = true;
+        notifications.enable = true;
+        office.enable = true;
+        sddm.enable = false;
+        uwsm.enable = true;
+        workPackages.enable = true;
+        virtualisation = {
+          enable = true;
+          program = "both";
+        };
       };
     };
 
-    hardware = {
-      audio.enable = true;
-      bluetooth.enable = true;
-      brightness.enable = true;
-      touchscreen.enable = false;
-      usb.enable = true;
-    };
-
-    software = {
-      ai.enable = false;
-      guiApps.enable = true;
-      home-manager.enable = true;
-      hypr.enable = true;
-      notifications.enable = true;
-      office.enable = true;
-      sddm.enable = false;
-      workPackages.enable = true;
-      virtualisation = {
-        enable = true;
-        program = "both";
-      };
-    };
+    specialisation.proxy-off.configuration.modules.base.proxy.enable = false;
   };
 }

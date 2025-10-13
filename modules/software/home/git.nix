@@ -9,6 +9,11 @@
       pull.rebase = true;
       advice.setUpstreamFailure = false;
     };
-    diff-so-fancy.enable = true;
+    # diff-so-fancy.enable = true;
+
+    difftastic = {
+      enable = true;
+      enableAsDifftool = true;
+    };
   };
 }

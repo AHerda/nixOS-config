@@ -1,23 +1,30 @@
 { config, lib, user, ... }:
 
 let
-  toPath = path: /. + "${config.home.homeDirectory}/${path}";
+  # toPath = path: /. + "${config.home.homeDirectory}/${path}";
+  linkConfig = name: {
+    ".config/${name}".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/${name}";
+  };
+  linkHome = name: {
+    "${name}".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/${name}";
+  };
 in
 {
-  home.file = {
-    ".config/alacritty".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/alacritty";
-    ".config/cava".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/cava";
-    ".config/eww".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/eww";
-    ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/hypr";
-    ".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/ghostty";
-    ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/kitty";
-    # ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/nvim";
-    # ".config/nushell".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/nushell";
-    ".config/rofi".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/rofi";
-    ".config/oh-my-posh".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/oh-my-posh";
-    ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/waybar";
-    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/.config/starship.toml";
+  home.file = lib.mkMerge [
+    ( linkConfig "alacritty" )
+    ( linkConfig "cava" )
+    ( linkConfig "eww" )
+    ( linkConfig "hypr" )
+    ( linkConfig "ghostty" )
+    ( linkConfig "kitty" )
+    # ( linkConfig "nvim" )
+    # ( linkConfig "nushell" )
+    ( linkConfig "rofi" )
+    ( linkConfig "oh-my-posh" )
+    ( linkConfig "quickshell" )
+    ( linkConfig "waybar" )
+    ( linkConfig "starship" )
 
-    "wallpapers".source = config.lib.file.mkOutOfStoreSymlink /. + "${config.home.homeDirectory}/.dotfiles/wallpapers";
-  };
+    ( linkHome "wallpapers" )
+  ];
 }

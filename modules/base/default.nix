@@ -12,6 +12,7 @@
     ./proxy.nix
     ./raspberryPi.nix
     ./security.nix
+    ./services.nix
     ./ssh.nix
     ./users.nix
   ];

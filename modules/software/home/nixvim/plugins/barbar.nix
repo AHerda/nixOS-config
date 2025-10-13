@@ -2,7 +2,7 @@ _:
 
 {
     programs.nixvim.plugins.barbar = {
-        enable = true;
+        enable = false;
         keymaps = {
             close.key = "<leader>bd";
             closeAllButCurrentOrPinned.key = "<leader>b<S-d>";
