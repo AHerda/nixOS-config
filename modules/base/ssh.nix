@@ -19,6 +19,7 @@ in {
   config = lib.mkMerge [
     {
       programs.ssh.startAgent = true;
+      services.gnome.gcr-ssh-agent.enable = lib.mkForce false;
     }
     (lib.mkIf cfg.openssh.enable {
       services.openssh.enable = true;

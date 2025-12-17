@@ -8,5 +8,6 @@ _:
 
   # for work
   "intune-portal"
+  "microsoft-identity-broker"
   "msalsdk-dbusclient"
 ]
