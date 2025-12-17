@@ -15,7 +15,16 @@ in
       pkgs.pavucontrol
     ];
     services.pulseaudio.enable = true;
-    services.pipewire.audio.enable = false;
-    services.pipewire.enable = false;
+
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = false;
+      audio.enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+      wireplumber = {
+        enable = true;
+      };
+    };
   };
 }

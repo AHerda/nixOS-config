@@ -6,7 +6,7 @@ _:
       {
         mode = "n";
         key = "<leader>e";
-        action = "<cmd>NvimTreeToggle<cr>";
+        action = "<cmd>NvimTreeFindFileToggle<cr>";
         options = {
           silent = true;
           desc = "Toggle Tree view";
@@ -15,10 +15,10 @@ _:
       {
         mode = "n";
         key = "<leader>E";
-        action = "<cmd>NvimTreeFindFile<cr>";
+        action = "<cmd>NvimTreeToggle<cr>";
         options = {
           silent = true;
-          desc = "Open and focus on tree view";
+          desc = "Open Tree view without focusing on current buffer";
         };
       }
     ];

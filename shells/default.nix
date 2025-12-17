@@ -17,8 +17,11 @@ in {
   rust = nixosShell "rust" {
     inherit pkgs;
     packages = with pkgs; [
-      rustup
       cargo
+      rustc
+      clippy
+      rustfmt
+      rust-analyzer
     ];
   };
   c = nixosShell "c" {

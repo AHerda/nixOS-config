@@ -25,13 +25,12 @@ in
 
       environment.systemPackages = with pkgs; [
         # Desktop
-        # rofi
         feh
         loupe
         nautilus
         nwg-drawer
         pkgs-unstable.pcmanfm
-        rofi-wayland
+        rofi
         wofi
         inputs.zen-browser.packages."${system}".default
 

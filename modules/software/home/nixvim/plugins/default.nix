@@ -5,6 +5,7 @@ _:
     ./barbar.nix
     ./blink.nix
     ./bufferline.nix
+    ./grugfar.nix
     ./highlight-colors.nix
     ./lazygit.nix
     ./lsp.nix

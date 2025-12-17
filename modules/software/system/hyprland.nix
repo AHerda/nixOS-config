@@ -27,6 +27,7 @@ in
       hyprpaper
       # waybar
       wl-clipboard
+      hyprshot
     ];
   };
 }

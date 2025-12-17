@@ -11,15 +11,15 @@
   # };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.05";
+      url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
@@ -45,6 +45,7 @@
         inherit inputs lib;
         inherit system;
         pkgs = import nixpkgs {
+          config.allowUnfree = true;
           inherit system;
         };
         pkgs-unstable = import nixpkgs-unstable {
@@ -52,7 +53,7 @@
           config = {
             allowUnfreePredicate = pkg:
               builtins.elem (lib.getName pkg) unfree;
-            permittedInsecurePackages = [ "jujutsu-0.23.0" ];
+            permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
           };
         };
       };

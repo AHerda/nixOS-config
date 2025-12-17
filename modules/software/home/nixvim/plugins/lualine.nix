@@ -2,6 +2,6 @@ _:
 
 {
     programs.nixvim.plugins.lualine = {
-        enable = true;
+        enable = false;
     };
 }

@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, config, osConfig, lib, ... }:
+{ pkgs, pkgs-unstable, config, osConfig, lib, user, ... }:
 
 let
   cfg = osConfig.modules.software.guiApps;
@@ -44,18 +44,25 @@ in {
         jujutsu = {
           enable = true;
           ediff = true;
+
+          settings = {
+            user.email = "${user.userEmail}";
+            user.name = "${user.fullName}";
+            ui.default-command = "st";
+          };
         };
 
         lazygit = {
           enable = true;
-          settings.git.paging.externalDiffCommand = "difft --color=always";
+          # uncomment it when the settings will correctly write config
+          # settings.git.pagers.externalDiffCommand = "difft --color=always";
         };
 
         oh-my-posh = {
           enable = true;
           enableZshIntegration = true;
           enableNushellIntegration = true;
-          # settings = builtins.fromTOML (builtins.unsafeDiscardStringContext (builtins.readFile "${config.home.homeDirectory}/.config/oh-my-posh/themes/my-theme.toml"));
+          configFile = "~/.config/oh-my-posh/themes/my-theme.toml";
           package = pkgs-unstable.oh-my-posh;
         };
 
@@ -90,6 +97,15 @@ in {
           };
         };
 
+        zellij = {
+          enable = true;
+          attachExistingSession = true;
+          exitShellOnExit = true;
+          settings = {
+            theme = "gruvbox-dark";
+          };
+        };
+
         zoxide = {
           enable = true;
           enableZshIntegration = true;
@@ -113,7 +129,6 @@ in {
 
         # Applications
         ncspot
-        pkgs-unstable.obsidian
       ];
     }
 
@@ -123,6 +138,10 @@ in {
         telegram-desktop
         pkgs-unstable.spotify
         brave
+        pkgs-unstable.obsidian
+
+        # editors
+        zed-editor
 
         # for flameshot
         xdg-desktop-portal

@@ -39,6 +39,7 @@
       # net
       query
       # units
+      desktop_notifications
     ];
 
     loginFile.text = ''
@@ -55,7 +56,7 @@
       }
       $env.config.completions.external.completer = $carapace_completer
 
-      oh-my-posh init nu --config ~/.config/oh-my-posh/themes/my-theme.toml
+      # oh-my-posh init nu --config ~/.config/oh-my-posh/themes/my-theme.toml
 
       def imssync [destination_dir, server, ...args] {
           print $"($destination_dir)"
