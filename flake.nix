@@ -31,6 +31,7 @@
       url = "github:nvmd/nixos-raspberrypi/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote.url = "github:nix-community/lanzaboote";
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, nixos-raspberrypi, ... }@inputs:

@@ -9,6 +9,7 @@
     ./packages.nix
     ./tmux.nix
     # ./xdg.nix
+    ./zed.nix
     ./zsh.nix
   ];
 

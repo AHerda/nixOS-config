@@ -6,12 +6,13 @@
     package = pkgs.nushell;
     shellAliases = {
       l = "ls -al";
-      ls = "ls";
+      # ls = "ls";
       ll = "ls -l";
       cat = "bat";
       v = "nvim";
       ".." = "z ..";
       ssk = "kitten ssh";
+      # core-cal = "cal";
       # update = "let path = (pwd); cd ~/nixos; sudo nix flake update; cd $path";
       rebuild = "sudo nixos-rebuild switch --flake ~/nixos";
       rebuild-test = "sudo nixos-rebuild test --flake ~/nixos";
@@ -87,6 +88,10 @@
               | transpose -r
               | into record
               | load-env
+      }
+
+      def cal2 [--month (-m): int = 1] {
+        cal --full-year 2026 -m -t --week-start mo | where month == $month | select mo tu we th fr sa su
       }
     '';
   };

@@ -1,19 +1,24 @@
 { user, ... }:
 
 {
-  programs.git = {
-    enable = true;
-    userName = user.fullName;
-    userEmail = user.userEmail;
-    extraConfig = {
-      pull.rebase = true;
-      advice.setUpstreamFailure = false;
-    };
-    # diff-so-fancy.enable = true;
+  programs = {
+    git = {
+      enable = true;
+      # diff-so-fancy.enable = true;
 
+      settings = {
+        user = {
+          name = user.fullName;
+          email = user.userEmail;
+        };
+
+        pull.rebase = true;
+        advice.setUpstreamFailure = false;
+      };
+    };
     difftastic = {
       enable = true;
-      enableAsDifftool = true;
+      git.diffToolMode = true;
     };
   };
 }

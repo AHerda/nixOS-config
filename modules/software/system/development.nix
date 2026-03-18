@@ -6,6 +6,8 @@
     eww
     julia
     pkgs-unstable.quickshell
+    wiremix
+    impala
 
     # uni apps
     # pkgs-unstable.wolfram-engine

@@ -4,12 +4,12 @@ _:
   programs.nixvim.plugins.startup = {
     enable = true;
 
-    colors = {
-      background = "#ffffff";
-      foldedSection = "#ffffff";
-    };
+    settings = {
+      colors = {
+        background = "#ffffff";
+        folded_section = "#ffffff";
+      };
 
-    sections = {
       header = {
         type = "text";
         oldfilesDirectory = false;
@@ -79,18 +79,15 @@ _:
         defaultColor = "";
         oldfilesAmount = 0;
       };
-    };
 
-    options = {
-      paddings = [
+      parts = [
+        "header"
+        "body"
+      ];
+      options.paddings = [
         1
         3
       ];
     };
-
-    parts = [
-      "header"
-      "body"
-    ];
   };
 }

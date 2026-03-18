@@ -54,6 +54,8 @@ in {
 
         lazygit = {
           enable = true;
+          enableNushellIntegration = true;
+          enableZshIntegration = true;
           # uncomment it when the settings will correctly write config
           # settings.git.pagers.externalDiffCommand = "difft --color=always";
         };
@@ -104,6 +106,7 @@ in {
           settings = {
             theme = "gruvbox-dark";
           };
+          enableZshIntegration = true;
         };
 
         zoxide = {
@@ -141,7 +144,6 @@ in {
         pkgs-unstable.obsidian
 
         # editors
-        zed-editor
 
         # for flameshot
         xdg-desktop-portal
