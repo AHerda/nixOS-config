@@ -11,6 +11,7 @@ in
       default = "docker";
       description = "Which virtualisation program to use";
     };
+    distrobox.enable = lib.mkEnableOption "Weather to enable distrobox";
   };
 
   config = lib.mkIf cfg.enable (

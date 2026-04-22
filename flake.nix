@@ -63,6 +63,7 @@
       nixosConfigurations = {
         nix-laptop = nixosSystem "nix-laptop" (inheritImportant { inherit system; });
         work-laptop = nixosSystem "work-laptop" (inheritImportant { inherit system; });
+        nix-server = nixosSystem "nix-server" (inheritImportant { inherit system; });
         # normalIso = nixosSystem "normalIso" (inheritImportant { inherit system; });
         # serverIso = nixosSystem "serverIso" (inheritImportant { inherit system; });
         # nix-pi = nixosPiSystem "nix-pi" (inheritImportant { system = "aarch64-linux"; });

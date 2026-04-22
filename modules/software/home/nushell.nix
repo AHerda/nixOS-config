@@ -1,9 +1,8 @@
-{ pkgs, ... }:
+{ config, lib, pkgs-unstable , ... }:
 
 {
   programs.nushell = {
     enable = true;
-    package = pkgs.nushell;
     shellAliases = {
       l = "ls -al";
       # ls = "ls";
@@ -14,8 +13,8 @@
       ssk = "kitten ssh";
       # core-cal = "cal";
       # update = "let path = (pwd); cd ~/nixos; sudo nix flake update; cd $path";
-      rebuild = "sudo nixos-rebuild switch --flake ~/nixos";
-      rebuild-test = "sudo nixos-rebuild test --flake ~/nixos";
+      rebuild = "sudo nixos-rebuild switch --flake ~/nixos --impure";
+      rebuild-test = "sudo nixos-rebuild test --flake ~/nixos --impure";
     };
 
     settings = {
@@ -33,17 +32,17 @@
     environmentVariables = {
       EDITOR = "nvim";
     };
-    plugins = with pkgs.nushellPlugins; [
+    plugins = with pkgs-unstable.nushellPlugins; [
       formats
       gstat
-      highlight
+      # highlight
       # net
       query
       # units
-      desktop_notifications
+      # desktop_notifications
     ];
 
-    loginFile.text = ''
+    loginFile.text = lib.mkIf config.modules.sofware.guiApps ''
       try {
           uwsm check may-start
           uwsm select
@@ -94,5 +93,6 @@
         cal --full-year 2026 -m -t --week-start mo | where month == $month | select mo tu we th fr sa su
       }
     '';
+    package = pkgs-unstable.nushell;
   };
 }

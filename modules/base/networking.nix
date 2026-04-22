@@ -1,4 +1,4 @@
-{ config, lib, pkgs, hostname, ... }:
+{ config, lib, pkgs-unstable, hostname, ... }:
 
 let
   cfg = config.modules.base;
@@ -11,6 +11,9 @@ in {
     avahi = {
       enable = lib.mkEnableOption "Weather to enable avahi service and publish hostaname to WLAN";
     };
+    tailscale = {
+      enable = lib.mkEnableOption "Weather to enable tailscale service";
+    };
   };
 
   config = lib.mkMerge [
@@ -19,12 +22,18 @@ in {
         hostName = hostname;
         firewall = {
           enable = lib.mkDefault true;
-          allowedTCPPorts = [ 22 80 ];
+          allowedTCPPorts = [ 22 ];
           allowedUDPPorts = [ ];
         };
       };
     }
-    (lib.mkIf cfg.enable {
+    (lib.mkIf cfg.tailscale.enable {
+      services.tailscale = {
+        enable = true;
+        package = pkgs-unstable.tailscale;
+      };
+    })
+    (lib.mkIf cfg.networkmanager.enable {
       networking.networkmanager = {
         enable = true;
         wifi.backend = "iwd";

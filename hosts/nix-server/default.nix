@@ -1,4 +1,4 @@
-{ user, ... }:
+{ pkgs, user, ... }:
 
 {
   imports = [
@@ -38,11 +38,17 @@
             "wheel"
           ];
           description = user.fullName;
+          shell = with pkgs; nushell;
         };
+        tailscale.enable = true;
         version = "25.05";
       };
       software = {
         home-manager.enable = true;
+        virtualisation = {
+          enable = true;
+          program = "podman";
+        };
       };
     };
   };
