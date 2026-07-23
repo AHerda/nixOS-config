@@ -42,13 +42,13 @@
       # desktop_notifications
     ];
 
-    loginFile.text = lib.mkIf config.modules.sofware.guiApps ''
-      try {
-          uwsm check may-start
-          uwsm select
-          uwsm start default
-      }
-    '';
+    # loginFile.text = lib.mkIf config.modules.sofware.guiApps ''
+    #   try {
+    #       uwsm check may-start
+    #       uwsm select
+    #       uwsm start default
+    #   }
+    # '';
 
     extraConfig = ''
       let carapace_completer = {|spans|

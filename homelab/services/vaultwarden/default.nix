@@ -1,56 +1,56 @@
 { config, lib, ... }:
 
 let
-  cfg = config.homelab.services.audiobookshelf;
+  cfg = config.homelab.services.vaultwarden;
   homelab = config.homelab;
 in {
-  options.homelab.services.audiobookshelf = {
+  options.homelab.services.vaultwarden = {
     enable = lib.mkEnableOption "Self hosted server for e-books, audiobooks and podcasts";
-    configDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/var/lib/audiobookshelf";
-    };
     host = lib.mkOption {
       type = lib.types.str;
       default = "127.0.0.1";
-      description = "The host that audiobookshelf will listen on";
+      description = "The host that vaultwarden will listen on";
     };
     port = lib.mkOption {
       type = lib.types.int;
-      default = 8000;
+      default = 8222;
     };
     url = lib.mkOption {
       type = lib.types.strMatching "[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*";
-      default = "books.${homelab.baseDomain}";
+      default = "pass.${homelab.baseDomain}";
     };
     homepage = {
       name = lib.mkOption {
         type = lib.types.str;
-        default = "Audiobookshelf";
+        default = "Vaultwarden";
       };
       description = lib.mkOption {
         type = lib.types.str;
-        default = "Self hosted server for e-books, audiobooks and podcasts";
+        default = "Self hosted password management tool";
       };
       icon = lib.mkOption {
         type = lib.types.str;
-        default = "audiobookshelf.svg";
+        default = "vaultwarden.svg";
       };
       category = lib.mkOption {
         type = lib.types.str;
-        default = "Media";
+        default = "Services";
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    services.audiobookshelf = {
+    services.vaultwarden = {
       enable = true;
-      user = homelab.user;
-      group = homelab.group;
-      host = cfg.host;
-      port = cfg.port;
-      openFirewall = true;
+      environmentFile = "/etc/secrets/vaultwarden.env";
+      config = {
+        DOMAIN = "https://${cfg.url}";
+        SIGNUPS_ALLOWED = false;
+        ROCKET_ADDRESS = cfg.host;
+        ROCKET_PORT = cfg.port;
+        EXTENDED_LOGGING = true;
+        LOG_LEVEL = "warn";
+      };
     };
     services.caddy.virtualHosts."${cfg.url}".extraConfig = ''
       reverse_proxy http://${cfg.host}:${toString cfg.port}
@@ -60,3 +60,4 @@ in {
     '';
   };
 }
+

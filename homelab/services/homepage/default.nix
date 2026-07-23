@@ -7,6 +7,21 @@ let
 in {
   options.homelab.services.homepage = {
     enable = lib.mkEnableOption "Enable HomePage dashboard";
+    port = lib.mkOption {
+      type = lib.types.int;
+      default = 8082;
+      description = "Port to which homepage will listen to";
+    };
+    host = lib.mkOption {
+      default = "localhost";
+      type = lib.types.str;
+      description = "The host that homepage will listen on";
+    };
+    url = lib.mkOption {
+      type = lib.types.strMatching "[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*";
+      description = "Url to enter the homepage server";
+      default = homelab.baseDomain;
+    };
     linkType = lib.mkOption {
       type = lib.types.enum ["by_urls" "by_hostname"];
       default = "by_hostname";
@@ -46,7 +61,7 @@ in {
       enable = true;
       openFirewall = true;
       # environmentFile = builtins.toFile "homepage.env" "HOMEPAGE_ALLOWED_HOSTS=${homelab.baseDomain}";
-      allowedHosts = "nix-server.local:8082,${homelab.baseDomain}";
+      allowedHosts = "${cfg.host}:${toString cfg.port},${cfg.url}";
       customCSS = ''
         body, html {
           font-family: SF Pro Display, Helvetica, Arial, sans-serif !important;
@@ -122,7 +137,7 @@ in {
             "Downloads"
             "Services"
           ];
-          categoryServices = category: (lib.attrsets.filterAttrs (name: value: value ? homepage && value.homepage.category == category) homelab.services);
+          categoryServices = category: (lib.attrsets.filterAttrs (name: value: value ? homepage && value.homepage.category == category && value.enable) homelab.services);
           nameOfCategoryServices = category: (lib.attrsets.mapAttrsToList (name: value: name) (categoryServices "${category}"));
           serviceConfig = service: {
             "${services.${service}.homepage.name}" = lib.mkMerge [
@@ -135,8 +150,8 @@ in {
                 siteMonitor = "http://${hostname}:${toString services.${service}.port}";
               })
               (lib.mkIf (cfg.linkType == "by_urls") {
-                href = "http://${services.${service}.url}";
-                siteMonitor = "http://${services.${service}.url}";
+                href = "https://${services.${service}.url}";
+                siteMonitor = "https://${services.${service}.url}";
               })
             ];
           };
@@ -153,7 +168,7 @@ in {
                   Info = {
                     widget = {
                       type = "glances";
-                      url = "http://localhost:${port}";
+                      url = "http://${cfg.host}:${port}";
                       metric = "info";
                       chart = false;
                       version = 4;
@@ -164,7 +179,7 @@ in {
                   Memory = {
                     widget = {
                       type = "glances";
-                      url = "http://localhost:${port}";
+                      url = "http://${cfg.host}:${port}";
                       metric = "memory";
                       chart = false;
                       version = 4;
@@ -175,7 +190,7 @@ in {
                   Processes = {
                     widget = {
                       type = "glances";
-                      url = "http://localhost:${port}";
+                      url = "http://${cfg.host}:${port}";
                       metric = "process";
                       chart = false;
                       version = 4;
@@ -186,7 +201,7 @@ in {
                   "CPU Usage" = {
                     widget = {
                       type = "glances";
-                      url = "http://localhost:${port}";
+                      url = "http://${cfg.host}:${port}";
                       metric = "cpu";
                       chart = true;
                       version = 4;
@@ -197,7 +212,7 @@ in {
                   "CPU Temp" = {
                     widget = {
                       type = "glances";
-                      url = "http://localhost:${port}";
+                      url = "http://${cfg.host}:${port}";
                       metric = "sensor:Package id 0";
                       chart = true;
                       version = 4;
@@ -208,7 +223,7 @@ in {
                   Network = {
                     widget = {
                       type = "glances";
-                      url = "http://localhost:${port}";
+                      url = "http://${cfg.host}:${port}";
                       metric = "network:wlp2s0";
                       chart = true;
                       version = 4;
@@ -220,8 +235,11 @@ in {
           ]
         ];
     };
-    services.caddy.virtualHosts.${homelab.baseDomain} = {
-      extraConfig = "reverse_proxy http://nix-server.local:${toString config.services.homepage-dashboard.listenPort}";
-    };
+    services.caddy.virtualHosts."${cfg.url}".extraConfig = ''
+      reverse_proxy http://${cfg.host}:${toString cfg.port}
+      tls {
+        dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+      }
+    '';
   };
 }

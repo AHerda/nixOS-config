@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs-unstable, ... }:
 
 let
   cfg = config.homelab.services.immich;
@@ -8,8 +8,8 @@ in {
   options.homelab.services.immich = {
     enable = lib.mkEnableOption "Enable immich - self-hosted photo and video management solution";
     mediaDir = lib.mkOption {
-      type = lib.types.path;
-      default = /var/lib/immich;
+      type = lib.types.str;
+      default = "/var/lib/immich";
       description = "Directory in which the media will be stored";
     };
     port = lib.mkOption {
@@ -23,7 +23,7 @@ in {
       description = "The host that immich will listen on";
     };
     url = lib.mkOption {
-      type = lib.types.strMatching "[a-zA-Z0-9]+(\.[a-zA-Z0-9])*";
+      type = lib.types.strMatching "[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*";
       description = "Url to enter the Immich server";
       default = "photos.${homelab.baseDomain}";
     };
@@ -51,6 +51,7 @@ in {
     systemd.tmpfiles.rules = [ "d ${cfg.mediaDir} 0775 immich ${homelab.group} - -" ];
     services.immich = {
       enable = true;
+      package = pkgs-unstable.immich;
       openFirewall = true;
       mediaLocation = "${cfg.mediaDir}";
       host = cfg.host;
@@ -60,8 +61,11 @@ in {
       "video"
       "render"
     ];
-    services.caddy.virtualHosts."${cfg.url}" = {
-      extraConfig = "reverse_proxy http://${cfg.host}:${toString cfg.port}";
-    };
+    services.caddy.virtualHosts."${cfg.url}".extraConfig = ''
+      reverse_proxy http://${cfg.host}:${toString cfg.port}
+      tls {
+        dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+      }
+    '';
   };
 }

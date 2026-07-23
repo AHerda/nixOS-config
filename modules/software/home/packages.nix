@@ -81,6 +81,7 @@ in {
           enable = true;
           enableZshIntegration = true;
           enableNushellIntegration = true;
+          shellWrapperName = "y";
           settings = {
             flavor.dark = "gruvbox";
             opener = {
@@ -120,7 +121,7 @@ in {
         # cli
         pkgs-unstable.lazyjj
         mprocs
-        neofetch
+        fastfetch
 
         #  config help
         stow

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ pkgs, config, lib, ... }:
 
 let
   cfg = config.homelab.services;
@@ -9,29 +9,25 @@ in {
 
   imports = [
     ./audiobookshelf
+    # ./collabora
     ./homepage
     ./immich
+    ./memos
+    ./nextcloud
+    ./owncloud
+    # ./onlyoffice
+    ./vaultwarden
   ];
 
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [ 80 443 ];
     services.caddy = {
       enable = true;
-      globalConfig = ''
-        auto_https off
-      '';
-      # virtualHosts = {
-      #   "http://${config.homelab.baseDomain}" = {
-      #     extraConfig = ''
-      #       redir http://{host}{uri}
-      #     '';
-      #   };
-      #   "http://*.${config.homelab.baseDomain}" = {
-      #     extraConfig = ''
-      #       redir http://{host}{uri}
-      #     '';
-      #   };
-      # };
+      package = pkgs.caddy.withPlugins {
+        plugins = [ "github.com/caddy-dns/cloudflare@v0.2.4" ];
+        hash = "sha256-7GoH8YLCoPmPExQxoga2FHB58zQDoZVf1BBwkVi0SsQ=";
+      };
+      environmentFile = "/etc/secrets/caddy.env";
     };
   };
 }

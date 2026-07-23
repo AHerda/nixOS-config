@@ -31,6 +31,7 @@ in {
       services.tailscale = {
         enable = true;
         package = pkgs-unstable.tailscale;
+        extraUpFlags = [ "--accept-dns=false" ];
       };
     })
     (lib.mkIf cfg.networkmanager.enable {
