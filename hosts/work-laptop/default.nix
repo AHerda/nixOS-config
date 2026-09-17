@@ -45,7 +45,7 @@
         audio.enable = true;
         bluetooth.enable = true;
         brightness.enable = true;
-        touchscreen.enable = false;
+        touch.enable = false;
         usb.enable = true;
       };
 

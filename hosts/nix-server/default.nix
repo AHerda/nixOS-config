@@ -23,6 +23,7 @@
           enable = true;
           host = "0.0.0.0";
         };
+        readeck.enable = true;
         memos.enable = true;
         nextcloud.enable = true;
         owncloud.enable = true;
@@ -34,9 +35,12 @@
         avahi.enable = true;
         bootLoader.enable = true;
         networkmanager.enable = true;
-        ssh.openssh = {
-          enable = true;
-          byKeys = true;
+        ssh = {
+          openssh = {
+            enable = true;
+            byKeys = true;
+          };
+          startAgent = false;
         };
         users.${user.userName} = {
           enable = true;

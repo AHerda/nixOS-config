@@ -1,6 +1,6 @@
 { config, lib, pkgs, ...}:
 
-let 
+let
   cfg = config.modules.hardware.brightness;
 in
 {
@@ -9,9 +9,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # environment.systemPackages = [
-    #     pkgs.light
-    # ];
-    programs.light.enable = true;
+    environment.systemPackages = [
+        pkgs.brightnessctl
+    ];
+    # programs.brigh.enable = true;
   };
 }

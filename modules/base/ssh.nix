@@ -14,11 +14,12 @@ in {
       enable = lib.mkEnableOption "Enable ssh server";
       byKeys = lib.mkEnableOption "Enable connecting only by keys";
     };
+    ssh.startAgent = lib.mkEnableOption "Start ssh-agent on machine start (not working for nushell)";
   };
 
   config = lib.mkMerge [
     {
-      programs.ssh.startAgent = true;
+      programs.ssh.startAgent = cfg.ssh.startAgent;
     }
     (lib.mkIf cfg.ssh.openssh.enable {
       services.openssh.enable = true;
